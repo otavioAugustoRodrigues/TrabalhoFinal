@@ -121,6 +121,8 @@ class GerenciadorPlanilha:
                     element_tab = element + '\t'
                     print(element_tab)
 
+    # -> implementa uma função que vai gerar na saída um arquivo com o estado atual de todos os itens
+         que foram cadastrados.
     def escreve_csv_colunas_diferentes(self, nomearquivo, controle_estoque : Type[ControleEstoque]):
         with open(nomearquivo, 'w', newline='') as csvfile:
             fieldnames = ['nome', 'quantidade', 'categoria', 'valor']
