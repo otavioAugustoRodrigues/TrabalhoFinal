@@ -81,80 +81,12 @@ class Item:
     def item_id(self, item_id) -> None:
         self._item_id = item_id
         
-
-class ControleEstoque:
-# constructor do nosso controle de estoque.
-    def __init__(self) -> None:
-        self._itens_cadastrados = []
-        self._itens__controle = []
-        self._item_id_controle = 0
-        pass
-
-# -> implementa um getter para a lista de itens cadastrados.
-    @property
-    def itens_cadastrados(self) -> Type[Item]:
-            return self._itens_cadastrados
-
-# -> implementa um getter para a lista de itens cadastrados.
-    @property
-    def item_id_controle(self) -> int:
-            return self._item_id_controle
-    
-# a ideia aqui é implementar uma função que vai verificar se um item
-# está cadastrado em nosso banco de itens cadastrados.
-    def verifica_item_cadastrado(self, item : Type[Item]) -> bool:
-        for i in self._itens_cadastrados:
-            if i.nome == item.nome:
-                return True
-
-# a ideia aqui é implementar uma função que vai cadastrar um item
-# no nosso banco de itens cadastrados.
-    def cadastra_item(self, item : Type[Item]) -> None:
-        if (not self.verifica_item_cadastrado(item)):
-            self._item_id_controle += 1
-            item.item_id = self._item_id_controle
-            self._itens_cadastrados.append(item)
-            print(f'{item.nome} {item.item_id} cadastrado com sucesso!')
-            
-# a ideia aqui é implementar uma função que vai remover um item
-# do nosso banco de itens cadastrados.
-    def remove_item(self, item : Type[Item]) -> None:
-        if self.verifica_item_cadastrado(item):
-            item._item_ativo = False
-
-# a ideia aqui é implementar uma função que vai retornar o índice
-# do membro da lista que estamos procurando (e utilizar em outras
-# funções futuramente);
-    def localiza_item(self, item : Type[Item]) -> int:
-        for i in self.itens_cadastrados:
-            if i.nome == item.nome:
-                return self.itens_cadastrados.index(i)
-
-
-# a ideia aqui é implementar uma classe que vai ser responsável
-# por imprimir o controle
-class GerenciadorPlanilha:
-    def le_csv(self, nomearquivo):
-        with open(nomearquivo, newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            #spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-            for row in reader:
-                print(row['nome'],"\t", row['quantidade'],"\t",row['categoria'],"\t",row['valor'])
-
-    def escreve_csv_colunas_diferentes(self, nomearquivo, controle_estoque : Type[ControleEstoque]):
-        with open(nomearquivo, 'w', newline='') as csvfile:
-            fieldnames = ['nome', 'quantidade', 'categoria', 'valor']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
-            for element in controle_estoque.itens_cadastrados:
-                writer.writerow({'nome': element.nome, 'quantidade': element.quantidade, 'categoria': element.categoria, 'valor': element.valor})
-
-
 class Fornecedor:
     def __init__(self, nome : str, pais : str, termo_pagamento : str) -> None:
         self._nome_fornecedor = nome
         self._pais = pais
         self._termo_pagamento = termo_pagamento
+        self._id_fornecedor = 0
         self._lista_itens = []
         self._valores_itens = []
 
@@ -198,7 +130,98 @@ class Fornecedor:
                 return f'{self._lista_itens[i].nome} , {self._valores_itens[i]}'
         else:
              return f'item não encontrado'
+        
+     
+class ControleEstoque:
+# constructor do nosso controle de estoque.
+    def __init__(self) -> None:
+        self._itens_cadastrados = []
+        self._fornecedores_cadastrados = []
+        self._item_id_controle = 0
+        self._fornecedor_id_controle = 0
+        pass
+
+# -> implementa um getter para a lista de itens cadastrados.
+    @property
+    def itens_cadastrados(self) -> Type[Item]:
+            return self._itens_cadastrados
+
+# -> implementa um getter para a lista de itens cadastrados.
+    @property
+    def item_id_controle(self) -> int:
+            return self._item_id_controle
+    
+# a ideia aqui é implementar uma função que vai verificar se um item
+# está cadastrado em nosso banco de itens cadastrados.
+    def verifica_item_cadastrado(self, item : Type[Item]) -> bool:
+        for i in self._itens_cadastrados:
+            if i.nome == item.nome:
+                return True
+        else:
+             return False 
+        
+# a ideia aqui é implementar uma função que vai verificar se um fornecedor
+# está cadastrado em nosso banco de fornecedores cadastrados.
             
+    def verifica_fornecedor_cadastrado(self, fornecedor : Type[Fornecedor]) -> None:
+        for i in self._itens_cadastrados:
+            if i.nome == fornecedor.nome_fornecedor:
+                return True
+        else:
+             return False    
+            
+# a ideia aqui é implementar uma função que vai cadastrar um item
+# no nosso banco de itens cadastrados.
+    def cadastra_item(self, item : Type[Item]) -> None:
+        if (not self.verifica_item_cadastrado(item)):
+            self._item_id_controle += 1
+            item.item_id = self._item_id_controle
+            self._itens_cadastrados.append(item)
+            print(f'{item.nome} {item.item_id} cadastrado com sucesso!')
+
+# a ideia aqui é implementar uma função que vai cadastrar um fornecedor
+# no nosso banco de fornecedores cadastrados.
+    def cadastra_fornecedor(self, fornecedor : Type[Fornecedor]) -> None:
+        if (not self.verifica_fornecedor_cadastrado(fornecedor)):
+            self._fornecedor_id_controle += 1
+            fornecedor._id_fornecedor = self._fornecedor_id_controle
+            self._fornecedores_cadastrados.append(fornecedor)
+            print(f'{fornecedor.nome_fornecedor} {fornecedor._id_fornecedor} cadastrado com sucesso!')
+
+# a ideia aqui é implementar uma função que vai remover um item
+# do nosso banco de itens cadastrados.
+    def remove_item(self, item : Type[Item]) -> None:
+        if self.verifica_item_cadastrado(item):
+            item._item_ativo = False
+
+# a ideia aqui é implementar uma função que vai retornar o índice
+# do membro da lista que estamos procurando (e utilizar em outras
+# funções futuramente);
+    def localiza_item(self, item : Type[Item]) -> int:
+        for i in self.itens_cadastrados:
+            if i.nome == item.nome:
+                return self.itens_cadastrados.index(i)
+
+
+# a ideia aqui é implementar uma classe que vai ser responsável
+# por imprimir o controle
+class GerenciadorPlanilha:
+    def le_csv(self, nomearquivo):
+        with open(nomearquivo, newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            #spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            for row in reader:
+                print(row['nome'],"\t", row['quantidade'],"\t",row['categoria'],"\t",row['valor'])
+
+    def escreve_csv_colunas_diferentes(self, nomearquivo, controle_estoque : Type[ControleEstoque]):
+        with open(nomearquivo, 'w', newline='') as csvfile:
+            fieldnames = ['nome', 'quantidade', 'categoria', 'valor']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            for element in controle_estoque.itens_cadastrados:
+                writer.writerow({'nome': element.nome, 'quantidade': element.quantidade, 'categoria': element.categoria, 'valor': element.valor})
+
+       
 def main():
 
 
@@ -218,11 +241,17 @@ def main():
     gerenciador_planilha.le_csv('teste.csv')
 
     fornecedorA = Fornecedor("fornA", "BR", "Faturado")
+    controle_estoque.cadastra_fornecedor(fornecedorA)
     fornecedorA.adicionar_iten_fornecedor(item1,0.35)
     fornecedorA.adicionar_iten_fornecedor(item2,5.00)
     fornecedorA.adicionar_iten_fornecedor(item3,7.50)
 
-    print(fornecedorA.printar_item("cola"))
-    
+    fornecedorB = Fornecedor("fornB", "US", "Boleto")
+    controle_estoque.cadastra_fornecedor(fornecedorB)
+    fornecedorB.adicionar_iten_fornecedor(item1,0.50)
+    fornecedorB.adicionar_iten_fornecedor(item2,4.80)
+    fornecedorB.adicionar_iten_fornecedor(item3,8.60)
+
+    print(controle_estoque.fornecedores_cadastrados[0].printar_item("cola"))
 
 main()
