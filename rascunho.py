@@ -11,16 +11,14 @@ class Item:
         self._item_id = 0
 
 
-# -> a ideia aqui será implementar herança para os diferentes tipos de cadastros entre itens vendidos pelo fornnecedor
-     e aqueles em controle no estoque.
-class ItemEstoque(Item):
-    def __init__(self, nome : str, quantidade : int, categoria : str, valor : float, item_ativo : bool) -> None:
-        super().__init__(nome, categoria, item_ativo)
-    pass
+# -> a ideia aqui será implementar herança para os diferentes tipos de cadastros entre itens vendidos pelo fornnecedor e aqueles em controle no estoque.
+#class ItemEstoque(Item):
+#    def __init__(self, nome : str, quantidade : int, categoria : str, valor : float, item_ativo : bool) -> None:
+#        super().__init__(nome, categoria, item_ativo)
+#    pass
 
-
-class ItemFornecedor(Item):
-    pass
+#class ItemFornecedor(Item):
+#    pass
 
 # -> implementa um getter para o nome do item (ex.: se é string etc...)
     @property
@@ -38,7 +36,7 @@ class ItemFornecedor(Item):
             return self._quantidade
         
 # -> implementa um setter para o nome do item (ex.: se é string etc...)
-    @nome.setter
+    @quantidade.setter
     def quantidade(self, quantidade) -> None:
         self._quantidade = quantidade
 
@@ -69,7 +67,7 @@ class ItemFornecedor(Item):
             return self._item_ativo
     
 # -> implementar um setter para alterar o estado atual do item entre obsoleto ou não.
-    @item_id.setter
+    @item_ativo.setter
     def item_ativo(self, item_ativo) -> None:
         self._item_ativo = item_ativo
 
@@ -138,11 +136,10 @@ class ControleEstoque:
 class GerenciadorPlanilha:
     def le_csv(self, nomearquivo):
         with open(nomearquivo, newline='') as csvfile:
-            spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-            for row in spamreader:
-                for element in row:
-                    element_tab = element + '\t'
-                    print(element_tab)
+            reader = csv.DictReader(csvfile)
+            #spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            for row in reader:
+                print(row['nome'],"\t", row['quantidade'],"\t",row['categoria'],"\t",row['valor'])
 
     def escreve_csv_colunas_diferentes(self, nomearquivo, controle_estoque : Type[ControleEstoque]):
         with open(nomearquivo, 'w', newline='') as csvfile:
@@ -154,15 +151,78 @@ class GerenciadorPlanilha:
 
 
 class Fornecedor:
-    def __init__(self, nome : str, pais : str, termo_pagamento : str, 
+    def __init__(self, nome : str, pais : str, termo_pagamento : str) -> None:
+        self._nome_fornecedor = nome
+        self._pais = pais
+        self._termo_pagamento = termo_pagamento
+        self._lista_itens = []
+        self._valores_itens = []
 
+# -> implementa um getter para o nome do fornecedor (ex.: se é string etc...)
+    @property
+    def nome_fornecedor(self) -> str:
+        return self._nome_fornecedor
+        
+# -> implementa um setter para o nome do fornecedor (ex.: se é string etc...)
+    @nome_fornecedor.setter
+    def nome_fornecedor(self, nome) -> None:
+        self._nome_fornecedor = nome
+    
+# -> implementa um getter para o país do fornecedor (ex.: se é string etc...)
+    @property
+    def pais(self) -> str:
+        return self._pais
+        
+# -> implementa um setter para o país do fornecedor (ex.: se é string etc...)
+    @pais.setter
+    def pais(self, pais) -> None:
+        self.pais = pais
+    
+# -> implementa um getter para o país do fornecedor (ex.: se é string etc...)
+    @property
+    def termo_pagamento(self) -> str:
+        return self._termo_pagamento
+        
+# -> implementa um setter para o país do fornecedor (ex.: se é string etc...)
+    @termo_pagamento.setter
+    def termo_pagamento(self, termo_pagamento) -> None:
+        self._termo_pagamento = termo_pagamento
 
+    def adicionar_iten_fornecedor(self, item : Type[Item], valor: float)->None:
+         self._lista_itens.append(item)
+         self._valores_itens.append(valor)
+
+    def printar_item(self, item :str)-> str:
+        for i in range(len(self._lista_itens)):
+            if self._lista_itens[i].nome == item:
+                return f'{self._lista_itens[i].nome} , {self._valores_itens[i]}'
+        else:
+             return f'item não encontrado'
+            
 def main():
-    item1 = Item("varistor", 1, "componente eletrônico", 0.35)
+
+
     controle_estoque = ControleEstoque()
-    controle_estoque.cadastra_item(item1)
     gerenciador_planilha = GerenciadorPlanilha()
+
+    item1 = Item("varistor", 2, "componente eletrônico", 0.35, False)
+    controle_estoque.cadastra_item(item1)
+
+    item2 = Item("lapis", 10, "item de escola", 2.00, True)
+    controle_estoque.cadastra_item(item2)
+
+    item3 = Item("cola", 50, "item de escola", 2.00, True)
+    controle_estoque.cadastra_item(item3)
     gerenciador_planilha.escreve_csv_colunas_diferentes('teste.csv', controle_estoque)
 
+    gerenciador_planilha.le_csv('teste.csv')
+
+    fornecedorA = Fornecedor("fornA", "BR", "Faturado")
+    fornecedorA.adicionar_iten_fornecedor(item1,0.35)
+    fornecedorA.adicionar_iten_fornecedor(item2,5.00)
+    fornecedorA.adicionar_iten_fornecedor(item3,7.50)
+
+    print(fornecedorA.printar_item("cola"))
+    
 
 main()
