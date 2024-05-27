@@ -10,6 +10,9 @@ class Item:
         self._item_ativo = item_ativo
         self._item_id = 0
 
+
+# -> a ideia aqui será implementar herança para os diferentes tipos de cadastros entre itens vendidos pelo fornnecedor
+     e aqueles em controle no estoque.
 class ItemEstoque(Item):
     def __init__(self, nome : str, quantidade : int, categoria : str, valor : float, item_ativo : bool) -> None:
         super().__init__(nome, categoria, item_ativo)
