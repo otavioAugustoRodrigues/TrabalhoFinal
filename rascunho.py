@@ -2,12 +2,22 @@ import csv
 from typing import Type 
 
 class Item:
-    def __init__(self, nome : str, quantidade : int, categoria : str, valor : float) -> None:
+    def __init__(self, nome : str, quantidade : int, categoria : str, valor : float, item_ativo : bool) -> None:
         self._nome_item = nome
         self._quantidade = quantidade
         self._categoria_item = categoria
         self._valor_item = valor
+        self._item_ativo = item_ativo
         self._item_id = 0
+
+class ItemEstoque(Item):
+    def __init__(self, nome : str, quantidade : int, categoria : str, valor : float, item_ativo : bool) -> None:
+        super().__init__(nome, categoria, item_ativo)
+    pass
+
+
+class ItemFornecedor(Item):
+    pass
 
 # -> implementa um getter para o nome do item (ex.: se é string etc...)
     @property
@@ -49,6 +59,16 @@ class Item:
     @categoria.setter
     def categoria(self, categoria) -> None:
         self._categoria_item = categoria
+
+# -> implementa um getter para verificar se o item está obsoleto ou não.
+    @property
+    def item_ativo(self) -> int:
+            return self._item_ativo
+    
+# -> implementar um setter para alterar o estado atual do item entre obsoleto ou não.
+    @item_id.setter
+    def item_ativo(self, item_ativo) -> None:
+        self._item_ativo = item_ativo
 
 # -> implementa um getter para o item_id do item 
     @property
@@ -99,7 +119,7 @@ class ControleEstoque:
 # do nosso banco de itens cadastrados.
     def remove_item(self, item : Type[Item]) -> None:
         if self.verifica_item_cadastrado(item):
-            del self.itens_cadastrados[localiza_item(item)]
+            item._item_ativo = False
 
 # a ideia aqui é implementar uma função que vai retornar o índice
 # do membro da lista que estamos procurando (e utilizar em outras
@@ -121,8 +141,6 @@ class GerenciadorPlanilha:
                     element_tab = element + '\t'
                     print(element_tab)
 
-    # -> implementa uma função que vai gerar na saída um arquivo com o estado atual de todos os itens
-         que foram cadastrados.
     def escreve_csv_colunas_diferentes(self, nomearquivo, controle_estoque : Type[ControleEstoque]):
         with open(nomearquivo, 'w', newline='') as csvfile:
             fieldnames = ['nome', 'quantidade', 'categoria', 'valor']
@@ -130,6 +148,10 @@ class GerenciadorPlanilha:
             writer.writeheader()
             for element in controle_estoque.itens_cadastrados:
                 writer.writerow({'nome': element.nome, 'quantidade': element.quantidade, 'categoria': element.categoria, 'valor': element.valor})
+
+
+class Fornecedor:
+    def __init__(self, nome : str, pais : str, termo_pagamento : str, 
 
 
 def main():
