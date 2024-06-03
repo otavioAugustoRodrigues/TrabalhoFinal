@@ -1,12 +1,13 @@
-from controleEstoque import *
-from filtraEstoque import *
+from controle_estoque import *
+from filtra_estoque import *
 from fornecedor import *
-from gerenciadorPlanilha import *
+from gerenciador_planilha import *
 from item import *
 from ordenaEstoque import *
-from variaMaterial import *
+from suprimentos import *
 
-def main():  
+if __name__ == "__main__":
+    """
     controle_estoque = ControleEstoque()
     gerenciador_planilha = GerenciadorPlanilha()
 
@@ -47,5 +48,4 @@ def main():
     
     filtra_estoque  = FiltraEstoque()
     filtra_estoque.filtra_nome(controle_estoque, "lapis")
-    
-main()
+    """

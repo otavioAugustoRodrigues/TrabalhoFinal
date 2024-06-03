@@ -29,16 +29,6 @@ class Item:
 
     # Getter para o valor do item (ex.: se é string etc...)
     @property
-    def valor(self) -> float:
-            return self._valor_item
-
-    # Setter para o valor do item (ex.: se o valor é muito grande/pequeno etc...
-    @valor.setter
-    def valor(self, valor) -> None:
-        self._valor_item = valor
-
-    # Getter para o valor do item (ex.: se é string etc...)
-    @property
     def categoria(self) -> str:
             return self._categoria_item
     
@@ -46,6 +36,16 @@ class Item:
     @categoria.setter
     def categoria(self, categoria) -> None:
         self._categoria_item = categoria
+    
+    # Getter para o valor do item (ex.: se é string etc...)
+    @property
+    def valor(self) -> float:
+            return self._valor_item
+
+    # Setter para o valor do item (ex.: se o valor é muito grande/pequeno etc...
+    @valor.setter
+    def valor(self, valor) -> None:
+        self._valor_item = valor
 
     # Getter para verificar se o item está obsoleto ou não.
     @property
