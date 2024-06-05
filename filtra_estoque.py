@@ -1,4 +1,4 @@
-from controleEstoque import *
+from controle_estoque import *
 
 # Classe responsável por filtrar o que está cadastrado no estoque de acordo com algum parâmetro.
 class FiltraEstoque:
