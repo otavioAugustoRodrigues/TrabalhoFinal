@@ -1,5 +1,5 @@
 from typing import Type
-from controleEstoque import *
+from controle_estoque import *
 
 # Classe responsável por ordenar o que está cadastrado no estoque de acordo com algum parâmetro.
 class OrdenaEstoque:

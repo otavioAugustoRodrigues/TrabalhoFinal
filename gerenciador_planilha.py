@@ -1,5 +1,5 @@
 import csv
-from controleEstoque import *
+from controle_estoque import *
 from datetime import datetime
 import tkinter as tk
 from tkinter import ttk
