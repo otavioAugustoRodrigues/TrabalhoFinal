@@ -5,6 +5,8 @@ from gerenciador_planilha import *
 from item import *
 from ordena_estoque import *
 from comprador_vendedor import *
+from testePanda import *
+import pandas as pd
 
 if __name__ == "__main__":
     controle_estoque = ControleEstoque()
@@ -22,28 +24,35 @@ if __name__ == "__main__":
     item4 = Item("lapis", 10, "item de escola", 2.50, True)
     controle_estoque.cadastra_item(item4)
     
-    gerenciador_planilha.escreve_csv_colunas_diferentes('teste.csv', controle_estoque)
+    # #gerenciador_planilha.escreve_csv_colunas_diferentes("teste.csv", controle_estoque)
 
-    gerenciador_planilha.le_csv('teste.csv')
-    gerenciador_planilha.escreve_tela_GUI(controle_estoque)
+    # #gerenciador_planilha.le_csv('teste.csv')
+    # #gerenciador_planilha.escreve_tela_GUI(controle_estoque)
 
-    fornecedorA = Fornecedor("fornA", "BR", "Faturado")
-    controle_estoque.cadastra_fornecedor(fornecedorA)
-    fornecedorA.adicionar_item_fornecedor(item1,0.35)
-    fornecedorA.adicionar_item_fornecedor(item2,5.00)
-    fornecedorA.adicionar_item_fornecedor(item3,7.50)
-
-    fornecedorB = Fornecedor("fornB", "US", "Boleto")
-    controle_estoque.cadastra_fornecedor(fornecedorB)
-    fornecedorB.adicionar_item_fornecedor(item1,0.50)
-    fornecedorB.adicionar_item_fornecedor(item2,4.80)
-    fornecedorB.adicionar_item_fornecedor(item3,8.60)
-
-    print(controle_estoque._fornecedores_cadastrados[0].printar_item("cola"))
+    # #print(controle_estoque._fornecedores_cadastrados[0].printar_item("cola"))
     
-    ordena_estoque = OrdenaEstoque()
-    ordena_estoque.ordena_nome(controle_estoque)
-    ordena_estoque.ordena_categoria(controle_estoque)
+    # # ordena_estoque = OrdenaEstoque()
+    # # ordena_estoque.ordena_nome(controle_estoque)
+    # # ordena_estoque.ordena_categoria(controle_estoque)
     
-    filtra_estoque  = FiltraEstoque()
-    filtra_estoque.filtra_nome(controle_estoque, "lapis")
+    # # filtra_estoque  = FiltraEstoque()
+    # # filtra_estoque.filtra_nome(controle_estoque, "lapis")
+    nomes = []
+    quantidades = []
+    categorias = []
+    valor = []
+    
+    for i in range(len(controle_estoque.itens_cadastrados)):
+      nomes.append(controle_estoque.itens_cadastrados[i].nome)
+      quantidades.append(controle_estoque.itens_cadastrados[i].quantidade)
+      categorias.append(controle_estoque.itens_cadastrados[i].categoria)
+      valor.append(controle_estoque.itens_cadastrados[i].valor)
+
+    d = {'Nome': nomes, 'Quantidade': quantidades, 'Categoria': categorias, 'Valor': valor}
+    dados = pd.DataFrame(data= d)
+   
+    print(dados)
+    dados.to_excel("tabelaExcel.xlsx", index=False)
+    ler = pd.read_excel("tabelaExcel.xlsx")
+    print(ler)
+   
