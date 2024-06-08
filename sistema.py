@@ -1,32 +1,3 @@
-# Classe responsável por inicializar o sistema e orientar
-# o usuário ao seu funcionamento.
-class Sistema:
-    def funcoes_sistema(self) -> None:
-        print(
-'''
-( 1 ) Visualizar estoque.
-( 2 ) Visualizar cadastro de itens/fornecedores.
-( 0 ) Encerrar o sistema.
-''')        
-    def imprime_sistema_tela(self):
-        print("inicializando o sistema...")
-        controle_estoque = ControleEstoque()
-        self.funcoes_sistema()
-        input_usr = input()
-
-        while True:
-            if input_usr == 0:
-                print("encerrando o sistema...\n\
-                      salvando as alterações feitas...")
-                # implementar aqui uma função para salvar o sistema
-                break
-            match input_usr:
-                case 1:
-                    
-                case 2:
-                    print()
-                case 3:
-
 from controle_estoque import *
 from filtra_estoque import *
 from fornecedor import *
@@ -35,44 +6,95 @@ from item import *
 from ordena_estoque import *
 from comprador_vendedor import *
 
-if __name__ == "__main__":
-    controle_estoque = ControleEstoque()
-    gerenciador_planilha = GerenciadorPlanilha()
-
-    item1 = Item("varistor", 2, "componente eletrônico", 0.35, False)
-    controle_estoque.cadastra_item(item1)
-
-    item2 = Item("lapis", 10, "item de escola", 2.00, True)
-    controle_estoque.cadastra_item(item2)
-
-    item3 = Item("cola", 50, "item de escola", 2.00, True)
-    controle_estoque.cadastra_item(item3)
+# Classe responsável por inicializar o sistema e orientar o usuário 
+# ao seu funcionamento.
+class Sistema:
+    # Implementa uma função que irá implementar as funções do sistema inicial.
+    def funcoes_sistema_inicial(self) -> None:
+        print(
+'''
+( 1 ) Visualizar estoque.
+( 2 ) Visualizar cadastro de itens/fornecedores.
+( 3 ) Comprar/vender um item.
+( 0 ) Encerrar o sistema.
+''')        
     
-    item4 = Item("lapis", 10, "item de escola", 2.50, True)
-    controle_estoque.cadastra_item(item4)
+    # Implementa uma função que irá implementar as funções para visualizar as
+    # funções relacionadas ao estoque.
+    def funcoes_sistema_visualizar_estoque(self) -> None:
+        print(
+'''
+( 1 ) Imprimir relatório com todos os itens do estoque.
+( 2 ) Imprimir relatório por item específico.
+( 0 ) Voltar.
+''')        
+
+    # Implementa uma função que irá implementar as funções para visualizar as
+    # funções relacionadas ao cadastro.
+    def funcoes_sistema_visualizar_cadastro(self) -> None:
+        print(
+'''
+( 1 ) Imprimir relatório com todos os itens/fornecedores cadastrados.
+( 2 ) Adicionar um novo item/fornecedor cadastrado.
+( 3 ) Tornar um item/fornecedor como 'não ativo'.
+( 0 ) Voltar.
+''')        
     
-    gerenciador_planilha.escreve_csv_colunas_diferentes('teste.csv', controle_estoque)
+    # Implementa uma função que irá ditar o funcionamento do sistema.
+    def sistema_controle_estoque(self):
+        print("inicializando o sistema...")
+        controle_estoque = ControleEstoque()
+        gerenciador_planilha = GerenciadorPlanilha()
+        self.funcoes_sistema_inicial()
+        input_usr = int(input())
 
-    gerenciador_planilha.le_csv('teste.csv')
-    gerenciador_planilha.escreve_tela_GUI(controle_estoque)
+        while True:
+            match input_usr:
+                case 0:
+                    print("encerrando o sistema...\n\
+                    salvando as alterações feitas...")
+                    # implementar aqui uma função para salvar o sistema
+                    break
 
-    fornecedorA = Fornecedor("fornA", "BR", "Faturado")
-    controle_estoque.cadastra_fornecedor(fornecedorA)
-    fornecedorA.adicionar_item_fornecedor(item1,0.35)
-    fornecedorA.adicionar_item_fornecedor(item2,5.00)
-    fornecedorA.adicionar_item_fornecedor(item3,7.50)
+                case 1:
+                    while True:
+                        input_usr = int(input())
+                        self.funcoes_sistema_visualizar_estoque()
+                        match input_usr:
+                            case 0:
+                                print("Voltando...")
+                                break
+                            case 1:
+                                break
+                            case 2:
+                                break
+                            case 3:
+                                break
+                
+                case 2:
+                    while True:
+                        input_usr = int(input())
+                        self.funcoes_sistema_visualizar_estoque()
+                        match input_usr:
+                            case 0:
+                                print("Voltando...")
+                                break
+                            case 1:
+                                break
+                            case 2:
+                                break
 
-    fornecedorB = Fornecedor("fornB", "US", "Boleto")
-    controle_estoque.cadastra_fornecedor(fornecedorB)
-    fornecedorB.adicionar_item_fornecedor(item1,0.50)
-    fornecedorB.adicionar_item_fornecedor(item2,4.80)
-    fornecedorB.adicionar_item_fornecedor(item3,8.60)
-
-    print(controle_estoque._fornecedores_cadastrados[0].printar_item("cola"))
-    
-    ordena_estoque = OrdenaEstoque()
-    ordena_estoque.ordena_nome(controle_estoque)
-    ordena_estoque.ordena_categoria(controle_estoque)
-    
-    filtra_estoque  = FiltraEstoque()
-    filtra_estoque.filtra_nome(controle_estoque, "lapis")
+                case 3: 
+                    while True:
+                        input_usr = int(input())
+                        self.funcoes_sistema_visualizar_cadastro()
+                        match input_usr:
+                            case 0:
+                                print("Voltando...")
+                                break
+                            case 1:
+                                break
+                            case 2:
+                                break
+                            case 3:
+                                break
