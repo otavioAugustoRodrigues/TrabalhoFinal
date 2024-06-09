@@ -1,10 +1,12 @@
 from controle_estoque import *
 from filtra_estoque import *
 from fornecedor import *
-from gerenciador_planilha import *
+from planilha_csv import *
 from item import *
 from ordena_estoque import *
-from comprador_vendedor import *
+from comprador import *
+from vendedor import *
+from programador_producao import *
 
 # Classe responsável por inicializar o sistema e orientar o usuário 
 # ao seu funcionamento.
@@ -44,7 +46,7 @@ class Sistema:
     def sistema_controle_estoque(self):
         print("inicializando o sistema...")
         controle_estoque = ControleEstoque()
-        gerenciador_planilha = GerenciadorPlanilha()
+        gerenciador_planilha = PlanilhaCSV()
         self.funcoes_sistema_inicial()
         input_usr = int(input())
 
