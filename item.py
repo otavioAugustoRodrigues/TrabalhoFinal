@@ -39,7 +39,7 @@ class Item:
     def quantidade_item(self, quantidade) -> None:
         self._quantidade = quantidade
 
-    # Getter para o valor do item (ex.: se é string etc...)
+    # Getter para a categoria do item.
     @property
     def categoria_item(self) -> str:
             return self._categoria_item

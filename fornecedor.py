@@ -1,5 +1,7 @@
 from typing import Type
 from item import *
+import csv 
+from controle_estoque import *
 
 class Fornecedor:
     def __init__(self, nome : str, pais : str, termo_pagamento : str) -> None:
@@ -40,6 +42,7 @@ class Fornecedor:
     def termo_pagamento_fornecedor(self, termo_pagamento) -> None:
         self._termo_pagamento = termo_pagamento
 
+    '''
     def adicionar_item_fornecedor(self, item : Type[Item], valor: float)->None:
          self._lista_itens.append(item)
          self._valores_itens.append(valor)
@@ -50,3 +53,4 @@ class Fornecedor:
                 return f'{self._lista_itens[i].nome_item} , {self._valores_itens[i]}'
         else:
              return f'item não encontrado'
+    '''

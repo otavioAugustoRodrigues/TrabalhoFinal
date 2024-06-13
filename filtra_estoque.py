@@ -29,4 +29,3 @@ class FiltraEstoque:
         print(f"{'Nome' :<15}\t{'Qtd.' :<5}\t{'Categoria' :<25}\t{'Valor' :<10}")
         for j in self.controle_estoque_ordenado_fornecedor:
             print(f"{j.nome_item :<15}\t{j.quantidade_item :<5}\t{j.categoria_item :<25}\t{j.valor_item :<10}")   
-            

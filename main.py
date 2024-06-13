@@ -8,10 +8,27 @@ from comprador import *
 from vendedor import *
 
 if __name__ == "__main__":
+    csv_content = """nome,quantidade,categoria,valor,fornecedor
+Item1,10,CategoryA,15.50,Supplier A
+Item2,5,CategoryB,25.00,Supplier A
+Item3,20,CategoryC,7.75,Supplier B
+Item4,15,CategoryA,10.00,Supplier B
+Item5,30,CategoryB,20.00,Supplier A
+"""
+
+    with open('teste.csv', 'w') as file:
+        file.write(csv_content)
+
     controle_estoque = ControleEstoque()
-    gerenciador_planilha = PlanilhaCSV()
-    Item.adiciona_categoria_valida("componente eletrônico")
-    Item.adiciona_categoria_valida("item de escola")
+    planilha_csv = PlanilhaCSV()
+    Item.adiciona_categoria_valida("CategoryA")
+    Item.adiciona_categoria_valida("CategoryB")
+
+    fornecedorA = Fornecedor("fornecedorA", "Brasil", "60EOM")
+    planilha_csv.adiciona_itens_fornecedor_planilha_csv('teste.csv', controle_estoque)
+    controle_estoque.printa_terminal_itens_cadastrados()
+    planilha_csv.escreve_tela_GUI(controle_estoque)
+    '''
     item1 = Item("varistor", 2, "componente eletrônico", 0.35)
     print(item1._categorias_validas)
     controle_estoque.cadastra_item(item1)
@@ -50,3 +67,4 @@ if __name__ == "__main__":
     
     filtra_estoque  = FiltraEstoque()
     filtra_estoque.filtra_controle_estoque_nome(controle_estoque, "lapis")
+    '''

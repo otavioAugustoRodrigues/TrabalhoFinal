@@ -30,14 +30,14 @@ class ControleEstoque:
              return False 
         
     # Método que verifica se um fornecedor está cadastrado no banco de fornecedores cadastrados.
-    def verifica_fornecedor_cadastrado(self, fornecedor : Type[Fornecedor]) -> None:
+    def verifica_fornecedor_cadastrado(self, fornecedor : Fornecedor) -> None:
         for i in self._itens_cadastrados:
             if i.nome_item == fornecedor.nome_fornecedor:
                 return True
         else:
              return False    
     
-    def cria_item_fornecedor(self, nome : str, quantidade : int, categoria : str, valor : float, nome_fornecedor : Fornecedor) -> None:
+    def cria_item_fornecedor(self, nome : str, quantidade : int, categoria : str, valor : float, nome_fornecedor : Type[Fornecedor]) -> None:
         item = Item(nome, quantidade, categoria, valor, False)
         item.nome_fornecedor = nome_fornecedor
         self.cadastra_item(item)
@@ -63,3 +63,7 @@ class ControleEstoque:
         for i in self.itens_cadastrados:
             if i.nome_item == item.nome_item:
                 return self.itens_cadastrados.index(i)
+            
+    def printa_terminal_itens_cadastrados(self):
+         for item in self.itens_cadastrados:
+              print(f"Item cadastrado: {item.nome_item}, Quantidade: {item.quantidade_item}, Categoria: {item.categoria_item}, Valor: {item.valor_item}, Fornecedor: {item.nome_fornecedor_item}")

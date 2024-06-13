@@ -1,5 +1,6 @@
-nome,quantidade,categoria,valor
-varistor,2,componente eletrônico,0.35
-lapis,10,item de escola,2.0
-cola,50,item de escola,2.0
-lapis,10,item de escola,2.5
+nome,quantidade,categoria,valor,fornecedor
+Item1,10,CategoryA,15.50,Supplier A
+Item2,5,CategoryB,25.00,Supplier A
+Item3,20,CategoryC,7.75,Supplier B
+Item4,15,CategoryA,10.00,Supplier B
+Item5,30,CategoryB,20.00,Supplier A
