@@ -12,6 +12,19 @@ if __name__ == "__main__":
     controle_estoque = ControleEstoque()
     gerenciador_planilha = GerenciadorPlanilha()
 
+    #le o arquivo com os Itens salvo
+    lerItens = pd.read_excel("tabelaExcel.xlsx")
+
+    for i in lerItens.itertuples(index=False):
+      nome = i.Nome
+      quantidade = int(i.Quantidade) 
+      categoria = i.Categoria
+      valor = float(i.Valor)
+
+      item = Item(nome, quantidade, categoria, valor, True)
+      controle_estoque.cadastra_item(item)
+
+
     item1 = Item("varistor", 2, "componente eletrônico", 0.35, False)
     controle_estoque.cadastra_item(item1)
 
@@ -23,6 +36,9 @@ if __name__ == "__main__":
     
     item4 = Item("lapis", 10, "item de escola", 2.50, True)
     controle_estoque.cadastra_item(item4)
+
+    item5 = Item("caneta", 80, "item de escola", 3.90, True)
+    controle_estoque.cadastra_item(item5)
     
     # #gerenciador_planilha.escreve_csv_colunas_diferentes("teste.csv", controle_estoque)
 
@@ -37,6 +53,8 @@ if __name__ == "__main__":
     
     # # filtra_estoque  = FiltraEstoque()
     # # filtra_estoque.filtra_nome(controle_estoque, "lapis")
+    
+    #cria lista de atributos dos itens e passa como parametro para criação do DataFrame e depois passa para excel
     nomes = []
     quantidades = []
     categorias = []
@@ -51,8 +69,7 @@ if __name__ == "__main__":
     d = {'Nome': nomes, 'Quantidade': quantidades, 'Categoria': categorias, 'Valor': valor}
     dados = pd.DataFrame(data= d)
    
-    print(dados)
     dados.to_excel("tabelaExcel.xlsx", index=False)
-    ler = pd.read_excel("tabelaExcel.xlsx")
-    print(ler)
+    print(dados)
+    
    
