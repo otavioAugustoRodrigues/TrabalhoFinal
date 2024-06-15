@@ -1,16 +1,23 @@
 from tkinter import *
+from tkinter import ttk
+from controle_estoque import ControleEstoque
+from typing import Type
+from item import Item
 
 janela = Tk()
 
-class ListItens():
-  def __init__(self):
+
+class ListItens( ):
+  def __init__(self, controle: Type[ControleEstoque])-> None:
    self.janela = janela
+   self.listaDeItens = controle.itens_cadastrados
    self.listitens()
    self.frame()
-   #self.botoes()
+   self.botoes()
+   self.lista()
    janela.mainloop()
 
-  def listitens(self):
+  def listitens(self)-> None:
    self.janela.title("LISTA DE ITENS")
    self.janela.configure(background = '#e1ede0')
    self.janela.geometry("700x500")
@@ -18,8 +25,33 @@ class ListItens():
    self.janela.maxsize(width=900,height=700)
    self.janela.minsize(width=500,height=400)
 
-  def frame(self):
-   self.frame = Frame(self.janela, bg='#e1ede0')
-   self.frame.place(relx="0", rely="0", relwidth="1", relheight="1")
+  def frame(self)-> None:
+   self.frame1 = Frame(self.janela, bg='#e1ede0')
+   self.frame1.place(relx="0", rely="0", relwidth="1", relheight="0.75")
 
-ListItens()
+   self.frame2 = Frame(self.janela, bg='#e1ede0')
+   self.frame2.place(relx="0", rely="0.75", relwidth="1", relheight="0.25")
+
+  def botoes(self)->None:
+    self.botaoVoltar = Button(self.frame2, text="VOLTAR")
+    self.botaoVoltar.place(relx="0.5", rely="0.5",relwidth="0.25", relheight="0.30", anchor="center")
+
+  def lista(self)-> None:
+   self.lis = ttk.Treeview(self.frame1,columns=('id','nome','quant','cate'), show='headings')
+   
+   self.lis.column('id',width=50,anchor="center")
+   self.lis.column('nome',width=200)
+   self.lis.column('quant',width=50,anchor="center")
+   self.lis.column('cate',width=200)
+   self.lis.heading('id', text='ID',anchor="center")
+   self.lis.heading('nome', text='NOME',anchor="center")
+   self.lis.heading('quant', text='QUANTIDADE',anchor="center")
+   self.lis.heading('cate', text='CATEGORIA',anchor="center")
+   self.lis.pack()
+
+   self.lis.place(relx="0.05", rely="0.05", relwidth="0.9", relheight="0.9")
+
+   for i in self.listaDeItens:
+    self.lis.insert("","end", values=(i.item_id(), i.nome(), i.quantidade(),i.categoria()))
+  
+   

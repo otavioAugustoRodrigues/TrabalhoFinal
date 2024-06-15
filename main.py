@@ -6,7 +6,11 @@ from item import *
 from ordena_estoque import *
 from comprador_vendedor import *
 from testePanda import *
+from JanelasTK.home import Home
+from JanelasTK.ListItens import ListItens
+
 import pandas as pd
+
 
 if __name__ == "__main__":
     controle_estoque = ControleEstoque()
@@ -68,6 +72,9 @@ if __name__ == "__main__":
 
     d = {'Nome': nomes, 'Quantidade': quantidades, 'Categoria': categorias, 'Valor': valor}
     dados = pd.DataFrame(data= d)
+
+    lista = ListItens(controle_estoque)
+    lista()
    
     dados.to_excel("tabelaExcel.xlsx", index=False)
     print(dados)
