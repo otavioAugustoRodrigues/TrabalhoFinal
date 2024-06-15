@@ -4,18 +4,15 @@ from controle_estoque import ControleEstoque
 from typing import Type
 from item import Item
 
-janela = Tk()
-
 
 class ListItens( ):
   def __init__(self, controle: Type[ControleEstoque])-> None:
-   self.janela = janela
-   self.listaDeItens = controle.itens_cadastrados
+   self.janela = Tk()
    self.listitens()
    self.frame()
    self.botoes()
-   self.lista()
-   janela.mainloop()
+   self.lista(controle)
+   self.janela.mainloop()
 
   def listitens(self)-> None:
    self.janela.title("LISTA DE ITENS")
@@ -33,10 +30,10 @@ class ListItens( ):
    self.frame2.place(relx="0", rely="0.75", relwidth="1", relheight="0.25")
 
   def botoes(self)->None:
-    self.botaoVoltar = Button(self.frame2, text="VOLTAR")
+    self.botaoVoltar = Button(self.frame2, text="VOLTAR", command=self.janela.destroy)
     self.botaoVoltar.place(relx="0.5", rely="0.5",relwidth="0.25", relheight="0.30", anchor="center")
 
-  def lista(self)-> None:
+  def lista(self, cont: Type[ControleEstoque])-> None:
    self.lis = ttk.Treeview(self.frame1,columns=('id','nome','quant','cate'), show='headings')
    
    self.lis.column('id',width=50,anchor="center")
@@ -51,7 +48,15 @@ class ListItens( ):
 
    self.lis.place(relx="0.05", rely="0.05", relwidth="0.9", relheight="0.9")
 
-   for i in self.listaDeItens:
-    self.lis.insert("","end", values=(i.item_id(), i.nome(), i.quantidade(),i.categoria()))
+   for i in range(len(cont.itens_cadastrados)):
+    id = cont.itens_cadastrados[i].item_id
+    nome = cont.itens_cadastrados[i].nome
+    quant = cont.itens_cadastrados[i].quantidade
+    categoria = cont.itens_cadastrados[i].categoria
+    self.lis.insert("","end", values=(id, nome, quant,categoria))
+   
   
+      
+
+
    

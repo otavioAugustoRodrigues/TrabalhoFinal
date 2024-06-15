@@ -73,9 +73,8 @@ if __name__ == "__main__":
     d = {'Nome': nomes, 'Quantidade': quantidades, 'Categoria': categorias, 'Valor': valor}
     dados = pd.DataFrame(data= d)
 
-    lista = ListItens(controle_estoque)
-    lista()
-   
+    Home(controle_estoque)
+
     dados.to_excel("tabelaExcel.xlsx", index=False)
     print(dados)
     
