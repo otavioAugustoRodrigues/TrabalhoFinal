@@ -3,14 +3,15 @@ from tkinter import ttk
 from controle_estoque import ControleEstoque
 from typing import Type
 from item import Item
+import tkinter as tk
 
 
 class ListItens( ):
-  def __init__(self, controle: Type[ControleEstoque])-> None:
+  def __init__(self, controle: Type[ControleEstoque], teste: tk.Tk)-> None:
    self.janela = Tk()
    self.listitens()
    self.frame()
-   self.botoes()
+   self.botoes(teste)
    self.lista(controle)
    self.janela.mainloop()
 
@@ -29,8 +30,14 @@ class ListItens( ):
    self.frame2 = Frame(self.janela, bg='#e1ede0')
    self.frame2.place(relx="0", rely="0.75", relwidth="1", relheight="0.25")
 
-  def botoes(self)->None:
-    self.botaoVoltar = Button(self.frame2, text="VOLTAR", command=self.janela.destroy)
+  def voltar(self, teste: tk.Tk):
+   self.janela.destroy()
+   teste.janela.deiconify()
+   
+   
+
+  def botoes(self, teste: tk.Tk)->None:
+    self.botaoVoltar = Button(self.frame2, text="VOLTAR", command=lambda:self.voltar(teste))
     self.botaoVoltar.place(relx="0.5", rely="0.5",relwidth="0.25", relheight="0.30", anchor="center")
 
   def lista(self, cont: Type[ControleEstoque])-> None:

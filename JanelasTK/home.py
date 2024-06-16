@@ -3,6 +3,7 @@ from JanelasTK.ListItens import ListItens
 from controle_estoque import ControleEstoque 
 from typing import Type
 from JanelasTK.ListItens import ListItens
+import tkinter as tk
  
 class Home():
   def __init__(self, controle: Type[ControleEstoque])-> None:
@@ -25,8 +26,9 @@ class Home():
     self.frame.place(relx="0", rely="0", relwidth="1", relheight="1")
 
   def abrirListI(self,controle: Type[ControleEstoque])->None:
-    self.janela.withdraw
-    ListItens(controle)
+    self.janela.withdraw()
+    ListItens(controle, self)
+    
 
   def botoes(self,controle: Type[ControleEstoque])-> None:
 
