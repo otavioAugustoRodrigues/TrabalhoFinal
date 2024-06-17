@@ -28,21 +28,6 @@ if __name__ == "__main__":
       item = Item(nome, quantidade, categoria, valor, True)
       controle_estoque.cadastra_item(item)
 
-
-    item1 = Item("varistor", 2, "componente eletrônico", 0.35, False)
-    controle_estoque.cadastra_item(item1)
-
-    item2 = Item("lapis", 10, "item de escola", 2.00, True)
-    controle_estoque.cadastra_item(item2)
-
-    item3 = Item("cola", 50, "item de escola", 2.00, True)
-    controle_estoque.cadastra_item(item3)
-    
-    item4 = Item("lapis", 10, "item de escola", 2.50, True)
-    controle_estoque.cadastra_item(item4)
-
-    item5 = Item("caneta", 80, "item de escola", 3.90, True)
-    controle_estoque.cadastra_item(item5)
     
     # #gerenciador_planilha.escreve_csv_colunas_diferentes("teste.csv", controle_estoque)
 
