@@ -62,7 +62,7 @@ class CriarItem():
         a=1
         break
     if(a==0 and self.is_int(q)== True and c != "" and self.is_float(v)== True):
-      item = Item(n,int(q),c,v,True)
+      item = Item(n,int(q),c,float(v),True)
       self.controle_estoque.cadastra_item(item)
       bd.salva_controle(self.controle_estoque)
       self.getNome.delete(0,tk.END)
