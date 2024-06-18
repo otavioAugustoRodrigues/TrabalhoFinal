@@ -5,29 +5,19 @@ from gerenciador_planilha import *
 from item import *
 from ordena_estoque import *
 from comprador_vendedor import *
-from testePanda import *
+from bancoDeDados import *
 from JanelasTK.home import Home
 from JanelasTK.ListItens import ListItens
+from bancoDeDados import BancoDados
 
 import pandas as pd
 
 
 if __name__ == "__main__":
     controle_estoque = ControleEstoque()
-    gerenciador_planilha = GerenciadorPlanilha()
+    bd = BancoDados()
 
-    #le o arquivo com os Itens salvo
-    lerItens = pd.read_excel("tabelaExcel.xlsx")
-
-    for i in lerItens.itertuples(index=False):
-      nome = i.Nome
-      quantidade = int(i.Quantidade) 
-      categoria = i.Categoria
-      valor = float(i.Valor)
-
-      item = Item(nome, quantidade, categoria, valor, True)
-      controle_estoque.cadastra_item(item)
-
+    controle = bd.le_controle()
     
     # #gerenciador_planilha.escreve_csv_colunas_diferentes("teste.csv", controle_estoque)
 
@@ -44,23 +34,9 @@ if __name__ == "__main__":
     # # filtra_estoque.filtra_nome(controle_estoque, "lapis")
     
     #cria lista de atributos dos itens e passa como parametro para criação do DataFrame e depois passa para excel
-    nomes = []
-    quantidades = []
-    categorias = []
-    valor = []
     
-    for i in range(len(controle_estoque.itens_cadastrados)):
-      nomes.append(controle_estoque.itens_cadastrados[i].nome)
-      quantidades.append(controle_estoque.itens_cadastrados[i].quantidade)
-      categorias.append(controle_estoque.itens_cadastrados[i].categoria)
-      valor.append(controle_estoque.itens_cadastrados[i].valor)
+    #Home(controle_estoque)
 
-    d = {'Nome': nomes, 'Quantidade': quantidades, 'Categoria': categorias, 'Valor': valor}
-    dados = pd.DataFrame(data= d)
-
-    Home(controle_estoque)
-
-    dados.to_excel("tabelaExcel.xlsx", index=False)
-    print(dados)
+    item = Item("Açucar",40,"Comida",5.40, True)
     
    
