@@ -1,16 +1,17 @@
 from tkinter import *
 from JanelasTK.ListItens import ListItens
+from JanelasTK.criarItem import CriarItem
 from controle_estoque import ControleEstoque 
 from typing import Type
-from JanelasTK.ListItens import ListItens
 import tkinter as tk
- 
+
+
 class Home():
-  def __init__(self, controle: Type[ControleEstoque])-> None:
+  def __init__(self)-> None:
     self.janela = Tk()
     self.home()
     self.frame()
-    self.botoes(controle)
+    self.botoes()
     self.janela.mainloop()
 
   def home(self) -> None:
@@ -25,20 +26,23 @@ class Home():
     self.frame = Frame(self.janela, bg='#e1ede0')
     self.frame.place(relx="0", rely="0", relwidth="1", relheight="1")
 
-  def abrirListI(self,controle: Type[ControleEstoque])->None:
+  def abrirListI(self)->None:
     self.janela.withdraw()
-    ListItens(controle, self)
-    
+    ListItens(self)
+  
+  def abrirCriarI(self)-> None:
+    self.janela.withdraw()
+    CriarItem(self)
 
-  def botoes(self,controle: Type[ControleEstoque])-> None:
+  def botoes(self)-> None:
 
     self.titulo = Label(self.frame, text="GERENCIADOR DE ESTOQUE")
     self.titulo.place(relx="0.5", rely="0.05", anchor="center")
 
-    self.botaoListItens = Button(self.frame, text="LISTA DE ITENS", command=lambda:self.abrirListI(controle))
+    self.botaoListItens = Button(self.frame, text="LISTA DE ITENS", command=lambda:self.abrirListI())
     self.botaoListItens.place(relx="0.375", rely="0.15", relwidth="0.25", relheight="0.1")
 
-    self.botaoCriarItem = Button(self.frame, text="CRIAR ITEM")
+    self.botaoCriarItem = Button(self.frame, text="CRIAR ITEM", command=lambda:self.abrirCriarI())
     self.botaoCriarItem.place(relx="0.375", rely="0.275", relwidth="0.25", relheight="0.1")
 
     self.botaoListForn = Button(self.frame, text="LISTA DE FORNECEDORES")

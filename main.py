@@ -14,9 +14,7 @@ import pandas as pd
 
 
 if __name__ == "__main__":
-    controle_estoque = ControleEstoque()
     bd = BancoDados()
-
     controle = bd.le_controle()
     
     # #gerenciador_planilha.escreve_csv_colunas_diferentes("teste.csv", controle_estoque)
@@ -34,9 +32,12 @@ if __name__ == "__main__":
     # # filtra_estoque.filtra_nome(controle_estoque, "lapis")
     
     #cria lista de atributos dos itens e passa como parametro para criação do DataFrame e depois passa para excel
-    
-    #Home(controle_estoque)
 
     item = Item("Açucar",40,"Comida",5.40, True)
+    controle.cadastra_item(item)
+
+    Home()
+
+    bd.salva_controle(controle)
     
    

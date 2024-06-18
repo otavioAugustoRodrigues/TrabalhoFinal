@@ -20,7 +20,7 @@ class BancoDados:
     
   
   def le_controle(self) -> Type[ControleEstoque]:
-    controle = ControleEstoque
+    controle = ControleEstoque()
     lerItens = pd.read_excel("tabelaExcel.xlsx")
     for i in lerItens.itertuples(index=False):
       nome = i.Nome
@@ -30,7 +30,7 @@ class BancoDados:
 
       item = Item(nome, quantidade, categoria, valor, True)
       controle.cadastra_item(item)
-      return controle
+    return controle
  
     
 
