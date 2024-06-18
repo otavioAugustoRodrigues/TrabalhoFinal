@@ -70,19 +70,19 @@ class CriarItem():
       self.getCategoria.delete(0,tk.END)
       self.getValor.delete(0,tk.END)
       try:
-        self.labelAvisoNome.destroy
+        self.labelAvisoNome.destroy()
       except:
         pass
       try:
-        self.labelAvisoQuant.destroy
+        self.labelAvisoQuant.destroy()
       except:
         pass
       try:
-        self.labelAvisoCategoria.destroy
+        self.labelAvisoCategoria.destroy()
       except:
         pass
       try:
-        self.labelAvisoValor.destroy
+        self.labelAvisoValor.destroy()
       except:
         pass
       
@@ -96,7 +96,7 @@ class CriarItem():
         self.labelAvisoNome.place(relx="0.50", rely="0.10",relwidth="0.50", relheight="0.075")
       else:
         try:
-          self.labelAvisoNome.destroy
+          self.labelAvisoNome.destroy()
         except:
           pass
 
@@ -105,7 +105,7 @@ class CriarItem():
         self.labelAvisoQuant.place(relx="0.50", rely="0.20",relwidth="0.50", relheight="0.075")
       else:
         try:
-          self.labelAvisoQuant.destroy
+          self.labelAvisoQuant.destroy()
         except:
           pass
       if(c == ""):
@@ -113,7 +113,7 @@ class CriarItem():
         self.labelAvisoCategoria.place(relx="0.50", rely="0.30",relwidth="0.50", relheight="0.075")
       else:
         try:
-          self.labelAvisoCategoria.destroy
+          self.labelAvisoCategoria.destroy()
         except:
           pass
       if(self.is_float(v)== False):
@@ -121,7 +121,7 @@ class CriarItem():
         self.labelAvisoValor.place(relx="0.50", rely="0.40",relwidth="0.50", relheight="0.075")
       else:
         try:
-          self.labelAvisoValor.destroy
+          self.labelAvisoValor.destroy()
         except:
           pass
           
