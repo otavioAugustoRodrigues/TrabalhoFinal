@@ -3,11 +3,10 @@ from filtra_estoque import *
 from fornecedor import *
 from gerenciador_planilha import *
 from item import *
-from ordenaEstoque import *
+from ordena_estoque import *
 from suprimentos import *
 
 if __name__ == "__main__":
-    """
     controle_estoque = ControleEstoque()
     gerenciador_planilha = GerenciadorPlanilha()
 
@@ -48,4 +47,3 @@ if __name__ == "__main__":
     
     filtra_estoque  = FiltraEstoque()
     filtra_estoque.filtra_nome(controle_estoque, "lapis")
-    """
