@@ -1,79 +1,93 @@
+from typing import Type
+
 class Item:
-    def __init__(self, nome : str, quantidade : int, categoria : str, valor : float, item_ativo : bool, materia_prima : bool) -> None:
-        self._nome_item = nome
-        self._quantidade = quantidade
-        self._categoria_item = categoria
-        self._valor_item = valor
-        self._item_ativo = item_ativo
-        self._materia_prima = materia_prima
-        self._item_id = 0
+    _categorias_validas = []
+
+    def __init__(self, nome : str, categoria : str) -> None:
+        self.nome_item = nome
+        self._quantidade_item = 0
+        self.categoria_item = categoria
+        self._valor_item = 0
+        self._item_ativo = False
+        self._id_item = 0
+        self._nome_fornecedor_item = 0
+
+    @classmethod
+    def adiciona_categoria_valida(self, nova_categoria_valida : str) -> None:
+        if type(nova_categoria_valida) == str:
+            self._categorias_validas.append(nova_categoria_valida)
+        else:
+            print("categoria inválida!")
+    
+    # Getter para o nome do item (ex.: se é string etc...)
+    @property
+    def get_nome_item(self) -> str:
+            return self.nome_item
+        
+    # Setter para o nome do item (ex.: se é string etc...)
+    @get_nome_item.setter
+    def set_nome_item(self, nome : str) -> None:
+        self.nome_item = nome
 
     # Getter para o nome do item (ex.: se é string etc...)
     @property
-    def nome(self) -> str:
-            return self._nome_item
+    def get_quantidade_item(self) -> int:
+            return self._quantidade_item
         
     # Setter para o nome do item (ex.: se é string etc...)
-    @nome.setter
-    def nome(self, nome) -> None:
-        self._nome_item = nome
+    @get_quantidade_item.setter
+    def set_quantidade_item(self, quantidade : int) -> None:
+        self._quantidade_item = quantidade
 
-    # Getter para o nome do item (ex.: se é string etc...)
+    # Getter para a categoria do item.
     @property
-    def quantidade(self) -> int:
-            return self._quantidade
-        
-    # Setter para o nome do item (ex.: se é string etc...)
-    @quantidade.setter
-    def quantidade(self, quantidade) -> None:
-        self._quantidade = quantidade
-
-    # Getter para o valor do item (ex.: se é string etc...)
-    @property
-    def categoria(self) -> str:
-            return self._categoria_item
+    def get_categoria_item(self) -> str:
+            return self.categoria_item
     
     # Setter para a categoria do item (ex.: se a categoria é válida - ela já existe em nosso banco de dados).
-    @categoria.setter
-    def categoria(self, categoria) -> None:
-        self._categoria_item = categoria
+    @get_categoria_item.setter
+    def set_categoria_item(self, categoria : str) -> None:
+        if categoria in self._categorias_validas:
+            self.categoria_item = categoria
+        else:
+            print("categoria não é válida!")
     
     # Getter para o valor do item (ex.: se é string etc...)
     @property
-    def valor(self) -> float:
+    def get_valor_item(self) -> float:
             return self._valor_item
 
     # Setter para o valor do item (ex.: se o valor é muito grande/pequeno etc...
-    @valor.setter
-    def valor(self, valor) -> None:
+    @get_valor_item.setter
+    def set_valor_item(self, valor : float) -> None:
         self._valor_item = valor
 
     # Getter para verificar se o item está obsoleto ou não.
     @property
-    def item_ativo(self) -> bool:
+    def get_item_ativo(self) -> int:
             return self._item_ativo
     
     # Setter para alterar o estado atual do item entre obsoleto ou não.
-    @item_ativo.setter
-    def item_ativo(self, item_ativo) -> None:
+    @get_item_ativo.setter
+    def set_item_ativo(self, item_ativo : bool) -> None:
         self._item_ativo = item_ativo
-
-    # Getter para verificar se o item é matéria prima ou não.
-    @property
-    def materia_prima(self) -> bool:
-            return self._materia_prima
-    
-    # Setter para transformar um item em matéria prima ou produto acabado.
-    @materia_prima.setter
-    def materia_prima(self, materia_prima) -> None:
-        self._materia_prima = materia_prima
 
     # Getter para o item_id do item 
     @property
-    def item_id(self) -> int:
-            return self._item_id
+    def get_id_item(self) -> int:
+            return self._id_item
     
     # Setter para a categoria do item 
-    @item_id.setter
-    def item_id(self, item_id) -> None:
-        self._item_id = item_id
+    @get_id_item.setter
+    def set_id_item(self, item_id : int) -> None:
+        self._id_item = item_id
+
+    # Getter para o nome do fornecedor (ex.: se é string etc...)
+    @property
+    def get_nome_fornecedor_item(self) -> str:
+            return str(self._nome_fornecedor_item)
+        
+    # Setter para o nome do item (ex.: se é string etc...)
+    @get_nome_fornecedor_item.setter
+    def set_nome_fornecedor_item(self, nome_fornecedor : str) -> None:
+        self._nome_fornecedor_item = nome_fornecedor
