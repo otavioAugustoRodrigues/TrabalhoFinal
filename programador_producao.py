@@ -3,7 +3,7 @@ from item import *
 
 class ProgramadorProducao:
     def transforma_item_ativo(item : Item) -> None:
-        item.item_ativo = True
+        item.set_item_ativo = True 
     
     def transforma_item_obsoleto(item : Item) -> None:
-        item.item_ativo = False
+        item.set_item_ativo = False

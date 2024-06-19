@@ -3,7 +3,6 @@ from controle_estoque import *
 
 # Classe responsável por ordenar o que está cadastrado no estoque de acordo com algum parâmetro.
 class OrdenaEstoque:
-
     # Classe responsável por ordenar o que está cadastrado no estoque de acordo com o nome dos itens.
     def ordena_estoque_nome(self, controle_estoque : Type[ControleEstoque]) -> None:
         controle_estoque_ordenado_nome = sorted(controle_estoque.itens_cadastrados, key=lambda x: x.nome_item)
