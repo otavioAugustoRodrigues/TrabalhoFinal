@@ -58,9 +58,12 @@ class EditarItem():
         except:
           pass
 
-        texto = f'VOCÊ ESTÁ EDITANDO O ITEM: {self.controle_estoque.itens_cadastrados[b].nome}'
+        textoId = f'VOCÊ ESTÁ EDITANDO O ITEM: {self.controle_estoque.itens_cadastrados[b].nome}'
+        textoQuant = f'Alterar Quantidade - a quantidade atual é {self.controle_estoque.itens_cadastrados[b].quantidade}'
+        
+        self.labelMudarQuantidade.config(text=textoQuant)
 
-        self.labelItemEnc = Label(self.frame1,text=texto ,bg='#fffef0')
+        self.labelItemEnc = Label(self.frame1,text=textoId ,bg='#fffef0')
         self.labelItemEnc.place(relx="0.50", rely="0.25",relwidth="1", relheight="0.10", anchor="center")
       else:
         try:
@@ -85,8 +88,6 @@ class EditarItem():
       self.labelIdInvalido = Label(self.frame1,text="ID INVÁLIDO" ,bg='#fffef0')
       self.labelIdInvalido.place(relx="0.50", rely="0.25",relwidth="1", relheight="0.10", anchor="center")
 
-
-
   def botoesFrame1(self) -> None:
     self.labelIdItem =Label(self.frame1,text="ID do Item: ",bg='#fffef0')
     self.labelIdItem.place(relx="0.1", rely="0.10",relwidth="0.15", relheight="0.10")
@@ -94,6 +95,21 @@ class EditarItem():
     self.getIdItem.place(relx="0.25", rely="0.10",relwidth="0.10", relheight="0.10")
     self.botaoValidarId = Button(self.frame1, text="VALIDAR ID", command=lambda:self.validarID())
     self.botaoValidarId.place(relx="0.65", rely="0.10",relwidth="0.25", relheight="0.10")
+
+    self.labelMudarCategoria =Label(self.frame1,text="Nova Categoria: ",bg='#fffef0')
+    self.labelMudarCategoria.place(relx="0.1", rely="0.35",relwidth="0.15", relheight="0.10")
+    self.getNovaCategoria = Entry(self.frame1)
+    self.getNovaCategoria.place(relx="0.25", rely="0.35",relwidth="0.30", relheight="0.10")
+
+    self.labelMudarQuantidade = Label(self.frame1,text="Alterar Quantidade",bg='#fffef0')
+    self.labelMudarQuantidade.place(relx="0.5", rely="0.60",relwidth="1", relheight="0.10", anchor="center")
+    self.getNovaQuantidade = Entry(self.frame1)
+    self.getNovaQuantidade.place(relx="0.55", rely="0.75",relwidth="0.30", relheight="0.10")
+    self.escolhaQuant = StringVar()
+    self.radiousAum = Radiobutton(self.frame1, text="Aumentar", variable=self.escolhaQuant, value=1,bg='#fffef0')
+    self.radiousAum.place(relx="0.15", rely="0.75",relwidth="0.15", relheight="0.05", anchor=tk.W)
+    self.radiousDim = Radiobutton(self.frame1, text="Diminuir", variable=self.escolhaQuant, value=2,bg='#fffef0')
+    self.radiousDim.place(relx="0.15", rely="0.80",relwidth="0.15", relheight="0.05", anchor=tk.W)
 
   def voltar(self, home: tk.Tk)-> None:
    self.janela.destroy()
@@ -104,4 +120,5 @@ class EditarItem():
     self.botaoVoltar.place(relx="0.2", rely="0.35",relwidth="0.25", relheight="0.30")
 
     self.botaoCriar = Button(self.frame2, text="SALVAR")
-    self.botaoCriar.place(relx="0.55", rely="0.35",relwidth="0.25", relheight="0.30")   
+    self.botaoCriar.place(relx="0.55", rely="0.35",relwidth="0.25", relheight="0.30")
+
