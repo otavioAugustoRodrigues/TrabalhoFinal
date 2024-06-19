@@ -6,16 +6,16 @@ from ordena_estoque import *
 from bancoDeDados import *
 from JanelasTK.home import Home
 from JanelasTK.ListItens import ListItens
-from bancoDeDados import BancoDados
+# from bancoDeDados import BancoDados
 from planilha_csv import *
 from comprador import *
 from vendedor import *
 
-import pandas as pd
+# import pandas as pd
 
 if __name__ == "__main__":
-    bd = BancoDados()
-    controle = bd.le_controle()
+    # bd = BancoDados()
+    # controle = bd.le_controle()
 
     controle_estoque = ControleEstoque()
 
@@ -71,9 +71,9 @@ if __name__ == "__main__":
 
     #cria lista de atributos dos itens e passa como parametro para criação do DataFrame e depois passa para excel
 
-    item = Item("Açucar",40,"Comida",5.40, True)
-    controle.cadastra_item(item)
+    #item = Item("Açucar",40,"Comida",5.40, True)
+    #controle.cadastra_item(item)
 
-    Home()
+    #Home()
 
-    bd.salva_controle(controle)
+    #bd.salva_controle(controle)

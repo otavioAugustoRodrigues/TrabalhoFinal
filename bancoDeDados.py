@@ -1,4 +1,4 @@
-import pandas as pd
+# import pandas as pd
 from controle_estoque import *
 from item import *
 

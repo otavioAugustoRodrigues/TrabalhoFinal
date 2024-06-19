@@ -18,7 +18,10 @@ class PlanilhaCSV:
             for row in reader:
                 print(f"Processing row: {row}")  # Debugging: Print each row
 
-                item = Item(row['nome'], row['quantidade'], row['categoria'], float(row['valor']))
+                item = Item(row['nome'], 
+                            row['quantidade'], 
+                            row['categoria'], 
+                            float(row['valor']))
                 item.nome_fornecedor_item = row['fornecedor']
                 controle_estoque.cadastra_item(item)
                 
@@ -29,7 +32,11 @@ class PlanilhaCSV:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             for i in controle_estoque.itens_cadastrados:
-                writer.writerow({'nome': i.nome_item, 'quantidade': i.quantidade_item, 'categoria': i.categoria_item, 'valor': i.valor_item, 'fornecedor' : i.nome_fornecedor_item})
+                writer.writerow({'nome': i.nome_item, 
+                                 'quantidade': i.quantidade_item, 
+                                 'categoria': i.categoria_item, 
+                                 'valor': i.valor_item, 
+                                 'fornecedor' : i.nome_fornecedor_item})
 
     # Método responsável por imprimir uma GUI com informações do controle de estoque no dia atual.
     def escreve_tela_GUI(self, controle_estoque : Type[ControleEstoque]) -> None:
@@ -44,9 +51,16 @@ class PlanilhaCSV:
         table.heading("qtd.", text="Qtd.")
         table.heading("categoria", text="Categoria")
         table.heading("valor", text="Valor")
+        table.heading("Fornecedor", text="Fornecedor")
 
-        for i, obj in enumerate(controle_estoque.itens_cadastrados, start=1):
-            table.insert("", "end", text=f"{obj.item_id}", values=(obj.nome_item, obj.quantidade_item, obj.categoria_item, obj.valor_item))
+        for i, obj in enumerate(controle_estoque.get_itens_cadastrados, start=1):
+            table.insert("", "end", 
+                         text=f"{obj.get_item_id}", 
+                         values=(obj.get_nome_item, 
+                                 obj.get_quantidade_item, 
+                                 obj.get_categoria_item, 
+                                 obj.get_valor_item,
+                                 obj.get_nome_fornecedor_item))
 
         table.pack(expand=True, fill=tk.BOTH)
 
