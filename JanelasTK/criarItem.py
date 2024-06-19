@@ -1,6 +1,4 @@
 from tkinter import *
-from tkinter import ttk
-from controle_estoque import ControleEstoque
 from typing import Type
 from item import Item
 import tkinter as tk
@@ -57,6 +55,27 @@ class CriarItem():
     v = self.getValor.get()
 
     a=0
+    try:
+      self.labelAvisoNome.destroy()
+    except:
+      pass
+    try:
+      self.labelAvisoQuant.destroy()
+    except:
+      pass
+    try:
+      self.labelAvisoCategoria.destroy()
+    except:
+      pass
+    try:
+      self.labelAvisoValor.destroy()
+    except:
+      pass
+    try:
+      self.labelItemCriad.destroy()
+    except:
+      pass
+
     for i in range(len(self.controle_estoque.itens_cadastrados)):
       if(self.controle_estoque.itens_cadastrados[i].nome == n):
         a=1
@@ -69,22 +88,6 @@ class CriarItem():
       self.getQuant.delete(0,tk.END)
       self.getCategoria.delete(0,tk.END)
       self.getValor.delete(0,tk.END)
-      try:
-        self.labelAvisoNome.destroy()
-      except:
-        pass
-      try:
-        self.labelAvisoQuant.destroy()
-      except:
-        pass
-      try:
-        self.labelAvisoCategoria.destroy()
-      except:
-        pass
-      try:
-        self.labelAvisoValor.destroy()
-      except:
-        pass
       
       self.labelItemCriad =  Label(self.frame1,text="ITEM CRIADO COM SUCESSO",bg='#fffef0')
       self.labelItemCriad.place(relx="0.50", rely="0.45",relwidth="0.50", relheight="0.1")
@@ -94,36 +97,19 @@ class CriarItem():
       if(a == 1):
         self.labelAvisoNome =  Label(self.frame1,text="ESTE ITEM JÁ EXISTE",bg='#fffef0')
         self.labelAvisoNome.place(relx="0.50", rely="0.10",relwidth="0.50", relheight="0.075")
-      else:
-        try:
-          self.labelAvisoNome.destroy()
-        except:
-          pass
-
+      
       if(self.is_int(q)== False):
         self.labelAvisoQuant =  Label(self.frame1,text="VALOR INVÁLIDO",bg='#fffef0')
         self.labelAvisoQuant.place(relx="0.50", rely="0.20",relwidth="0.50", relheight="0.075")
-      else:
-        try:
-          self.labelAvisoQuant.destroy()
-        except:
-          pass
+      
       if(c == ""):
         self.labelAvisoCategoria =  Label(self.frame1,text="VALOR INVÁLIDO",bg='#fffef0')
         self.labelAvisoCategoria.place(relx="0.50", rely="0.30",relwidth="0.50", relheight="0.075")
-      else:
-        try:
-          self.labelAvisoCategoria.destroy()
-        except:
-          pass
+      
       if(self.is_float(v)== False):
         self.labelAvisoValor =  Label(self.frame1,text="VALOR INVÁLIDO",bg='#fffef0')
         self.labelAvisoValor.place(relx="0.50", rely="0.40",relwidth="0.50", relheight="0.075")
-      else:
-        try:
-          self.labelAvisoValor.destroy()
-        except:
-          pass
+      
           
          
   def botoes(self, home: Type[tk.Tk]):
