@@ -82,7 +82,8 @@ class ControleEstoque:
     # Método que imprime na tela todos os itens cadastrados no controle de estoque.
     def printa_terminal_itens_cadastrados(self):
         for item in self.get_itens_cadastrados:
-            print(f"ID do item: {item.get_id_item}, Item cadastrado: {item.get_nome_item}, Quantidade: {item.get_quantidade_item}, Categoria: {item.categoria_item}, Valor: {item.get_valor_item}, Fornecedor: {item.fornecedor.get_nome_fornecedor}")
+            if item.fornecedor is not None:
+                print(f"ID do item: {item.get_id_item}, Item cadastrado: {item.get_nome_item}, Quantidade: {item.get_quantidade_item}, Categoria: {item.categoria_item}, Valor: {item.get_valor_item}, Valor total no estoque: {item.get_valor_total_estoque}, Fornecedor: {item.fornecedor.get_nome_fornecedor}, ")
 
     # Método que imprime na tela todos os fornecedores cadastrados no controle de estoque.
     def printa_terminal_fornecedores_cadastrados(self):
@@ -91,9 +92,10 @@ class ControleEstoque:
 
     # Método que checa se um item cadastrado já foi cadastrado anteriormente para este mesmo fornecedor.
     def checa_item_cadastrado_fornecedor(self, item: Type[Item], fornecedor : Type[Fornecedor]) -> bool:
-        for i in self.get_itens_cadastrados:
-            if i.get_nome_item == item.get_nome_item and i.fornecedor.get_nome_fornecedor == fornecedor.get_nome_fornecedor:
-                return True
+        if item.fornecedor is not None:
+            for i in self.get_itens_cadastrados:
+                if i.get_nome_item == item.get_nome_item and i.fornecedor.get_nome_fornecedor == fornecedor.get_nome_fornecedor:
+                    return True
         else:
             return False
 
@@ -107,21 +109,17 @@ class ControleEstoque:
                 print(f"item {item.get_nome_item} já cadastrado para o fornecedor {fornecedor.get_nome_fornecedor}. Atualizando valor do item...")
                 item.set_valor_item = valor_item_fornecedor
             else:
-                #print("b")
                 novo_item_cadastrado = Item(item.get_nome_item, item.get_categoria_item)
                 novo_item_cadastrado.set_valor_item = valor_item_fornecedor
-                novo_item_cadastrado.fornecedor.set_nome_fornecedor = fornecedor.get_nome_fornecedor
-                novo_item_cadastrado.fornecedor.set_pais_fornecedor = fornecedor.get_pais_fornecedor
-                novo_item_cadastrado.fornecedor.set_termo_pagamento_fornecedor = fornecedor.get_termo_pagamento_fornecedor
-                novo_item_cadastrado.fornecedor.set_id_fornecedor = fornecedor.get_id_fornecedor
+                novo_item_cadastrado.set_fornecedor(fornecedor)
                 self.cadastra_item(novo_item_cadastrado)
                 self.imprime_informacoes_item_atributos(novo_item_cadastrado)
         else:
-            self.cadastra_fornecedor(fornecedor)
-            self.cadastra_item_fornecedor(fornecedor, item, valor_item_fornecedor)
+            print("fornecedor não cadastrado!")
     
     def imprime_informacoes_item_cabecalho(self) -> None:
-        print(f"{'ID':<5}\t{'Nome do item':<25}\t{'Quantidade':<10}\t{'Categoria':<15}\t{'Valor unitário (BRL)':<20}\t{'Valor total em estoque':<25}\t{'Nome do fornecedor':<20}\t{'ID do fornecedor':<16}")
+        print(f"{'ID':<5}\t{'Nome do item':<25}\t{'Quantidade':<10}\t{'Categoria':<15}\t{'Valor unitário (BRL)':<20}\t{'Valor total em estoque':<25}\t{'Nome do fornecedor':<20}\t{'ID do fornecedor':<16}\t{'País do fornecedor':<20}\t{'Termo de pgto. fornecedor':<25}")
     
     def imprime_informacoes_item_atributos(self, item : Type[Item]) -> None:
-        print(f"{item.get_id_item:<5}\t{item.get_nome_item:<25}\t{item.get_quantidade_item:<10}\t{item.get_categoria_item:<15}\t{item.get_valor_item:<20}\t{item.get_valor_total_estoque():<25}\t{item.fornecedor.get_nome_fornecedor:<20}")
+        if item.fornecedor is not None:
+            print(f"{item.get_id_item:<5}\t{item.get_nome_item:<25}\t{item.get_quantidade_item:<10}\t{item.get_categoria_item:<15}\t{item.get_valor_item:<20}\t{item.get_valor_total_estoque():<25}\t{item.fornecedor.get_nome_fornecedor:<20}\t{item.fornecedor.get_id_fornecedor}\t{item.fornecedor.get_pais_fornecedor}\t{item.fornecedor.get_termo_pagamento_fornecedor}")

@@ -23,10 +23,10 @@ if __name__ == "__main__":
     fornecedor1 = Fornecedor("Leitura", "Brasil", "30D NET")
     controle_estoque.cadastra_fornecedor(fornecedor1)
 
-    fornecedor2 = Fornecedor("Renner", "Brasil", "30D NET")
+    fornecedor2 = Fornecedor("Renner", "EUA", "60D NET")
     controle_estoque.cadastra_fornecedor(fornecedor2)
 
-    fornecedor3 = Fornecedor("Arkom", "Brasil", "30D NET")
+    fornecedor3 = Fornecedor("Arkom", "Inglaterra", "90D NET")
     controle_estoque.cadastra_fornecedor(fornecedor3)
 
     #controle_estoque.printa_terminal_fornecedores_cadastrados()

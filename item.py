@@ -11,7 +11,7 @@ class Item:
         self._valor_item = 0
         self._item_ativo = False
         self._id_item = 0
-        self.fornecedor = Fornecedor('0','0','0')
+        self.fornecedor = None
 
     @classmethod
     def adiciona_categoria_valida(self, nova_categoria_valida : str) -> None:
@@ -83,17 +83,16 @@ class Item:
     def set_id_item(self, item_id : int) -> None:
         self._id_item = item_id
 
-    '''
-    # Getter para o nome do fornecedor (ex.: se é string etc...)
-    @property
-    def get_nome_fornecedor_item(self) -> str:
-            return str(self._nome_fornecedor_item)
-        
-    # Setter para o nome do item (ex.: se é string etc...)
-    @get_nome_fornecedor_item.setter
-    def set_nome_fornecedor_item(self, nome_fornecedor : str) -> None:
-        self._nome_fornecedor_item = nome_fornecedor
-    '''
+    def set_fornecedor(self, fornecedor : Type[Fornecedor]) -> None:
+        if self.fornecedor is None:
+             self.fornecedor = Fornecedor(fornecedor.get_nome_fornecedor, fornecedor.get_pais_fornecedor, fornecedor.get_termo_pagamento_fornecedor)
+             self.fornecedor.set_id_fornecedor = fornecedor.get_id_fornecedor
+        else:
+            if isinstance(fornecedor, Fornecedor):
+                self.fornecedor.set_nome_fornecedor = fornecedor.get_nome_fornecedor
+                self.fornecedor.set_pais_fornecedor = fornecedor.get_pais_fornecedor
+                self.fornecedor.set_termo_pagamento_fornecedor = fornecedor.get_termo_pagamento_fornecedor
+                self.fornecedor.set_id_fornecedor = fornecedor.get_id_fornecedor
         
     def get_valor_total_estoque(self) -> float:
          return self.get_valor_item * self.get_quantidade_item         

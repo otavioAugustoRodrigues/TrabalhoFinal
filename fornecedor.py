@@ -28,7 +28,7 @@ class Fornecedor:
     # Setter para o país do fornecedor (ex.: se é string etc...)
     @get_pais_fornecedor.setter
     def set_pais_fornecedor(self, pais : str) -> None:
-        self.pais = pais
+        self._pais_fornecedor = pais
     
     # Getter para o país do fornecedor (ex.: se é string etc...)
     @property
@@ -53,15 +53,3 @@ class Fornecedor:
     @get_id_fornecedor.setter
     def set_id_fornecedor(self, id : int) -> None:
         self._id_fornecedor = id
-
-    
-    #def adicionar_item_fornecedor(self, item : Type[Item], valor: float)->None:
-    #     self._lista_itens.append(item)
-    #     self._valores_itens.append(valor)
-
-    #def printar_item(self, item :str)-> str:
-    #    for i in range(len(self._lista_itens)):
-    #        if self._lista_itens[i].nome_item == item:
-    #            return f'{self._lista_itens[i].nome_item} , {self._valores_itens[i]}'
-    #    else:
-    #         return f'item não encontrado'

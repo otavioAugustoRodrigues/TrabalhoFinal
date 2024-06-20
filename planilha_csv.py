@@ -27,9 +27,8 @@ class PlanilhaCSV:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             for item in controle_estoque.get_itens_cadastrados:
-                #print(f"{'ID':<5}\t{'Nome do item':<25}\t{'Quantidade':<10}\t{'Categoria':<15}\t{'Valor unitário (BRL)':<20}\t{'Valor total em estoque':<25}\t{'Nome do fornecedor':<20}")
-                #print(f"{item.get_id_item:<5}\t{item.get_nome_item:<25}\t{item.get_quantidade_item:<10}\t{item.get_categoria_item:<15}\t{item.get_valor_item:<20}\t{item.get_valor_total_estoque():<25}\t{item.get_nome_fornecedor_item:<20}")
-                writer.writerow({'ID': item.get_id_item, 'nome': item.get_nome_item, 'quantidade': item.get_quantidade_item, 'categoria': item.get_categoria_item, 'valor': item.get_valor_item, 'Valor total em estoque' : item.get_valor_total_estoque(), 'fornecedor' : item.fornecedor.get_nome_fornecedor, 'pais fornecedor' : item.fornecedor.get_pais_fornecedor, 'termo pgto fornecedor' : item.fornecedor.get_termo_pagamento_fornecedor})
+                if item.fornecedor is not None:
+                    writer.writerow({'ID': item.get_id_item, 'nome': item.get_nome_item, 'quantidade': item.get_quantidade_item, 'categoria': item.get_categoria_item, 'valor': item.get_valor_item, 'Valor total em estoque' : item.get_valor_total_estoque(), 'fornecedor' : item.fornecedor.get_nome_fornecedor, 'ID do fornecedor' : item.fornecedor.get_id_fornecedor, 'pais fornecedor' : item.fornecedor.get_pais_fornecedor, 'termo pgto fornecedor' : item.fornecedor.get_termo_pagamento_fornecedor})
 
     # Método responsável por imprimir uma GUI com informações do controle de estoque no dia atual.
     def escreve_tela_GUI(self, controle_estoque : Type[ControleEstoque]) -> None:
@@ -51,7 +50,8 @@ class PlanilhaCSV:
         table.heading("termo pgto fornecedor", text="Fornecedor")
 
         for i, item in enumerate(controle_estoque.get_itens_cadastrados, start=1):
-            table.insert("", "end", values=(item.get_id_item, item.get_nome_item, item.get_quantidade_item, item.get_categoria_item, item.get_valor_item, item.get_valor_total_estoque(), item.fornecedor.get_nome_fornecedor, item.fornecedor.get_id_fornecedor, item.fornecedor.get_pais_fornecedor, item.fornecedor.get_termo_pagamento_fornecedor))
+            if item.fornecedor is not None:
+                table.insert("", "end", values=(item.get_id_item, item.get_nome_item, item.get_quantidade_item, item.get_categoria_item, item.get_valor_item, item.get_valor_total_estoque(), item.fornecedor.get_nome_fornecedor, item.fornecedor.get_id_fornecedor, item.fornecedor.get_pais_fornecedor, item.fornecedor.get_termo_pagamento_fornecedor))
 
         table.pack(expand=True, fill=tk.BOTH)
 

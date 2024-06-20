@@ -1,13 +1,10 @@
 ID,nome,quantidade,categoria,valor,Valor total em estoque,fornecedor,ID do fornecedor,pais fornecedor,termo pgto fornecedor
-1,lapis,0,material escolar,2.5,0.0,0,,0,0
-2,tesoura,0,material escolar,0,0,0,,0,0
-3,calça,0,roupa,0,0,0,,0,0
-4,blusa,0,roupa,0,0,0,,0,0
-5,varistor,0,componente eletrônico,0.001,0.0,0,,0,0
-6,LED,0,componente eletrônico,0,0,0,,0,0
-7,lapis,0,material escolar,1,0,Leitura,,0,0
-8,tesoura,0,material escolar,1.5,0.0,Leitura,,0,0
-9,lapis,0,material escolar,3,0,Renner,,0,0
-10,calça,0,roupa,299.9,0.0,Renner,,0,0
-11,blusa,0,roupa,99.9,0.0,Renner,,0,0
-12,varistor,0,componente eletrônico,0.0005,0.0,Arkom,,0,0
+7,lapis,0,material escolar,1,0,Leitura,1,Brasil,30D NET
+8,tesoura,0,material escolar,1.5,0.0,Leitura,1,Brasil,30D NET
+9,lapis,0,material escolar,3,0,Renner,2,EUA,60D NET
+10,calça,0,roupa,299.9,0.0,Renner,2,EUA,60D NET
+11,blusa,0,roupa,99.9,0.0,Renner,2,EUA,60D NET
+12,varistor,0,componente eletrônico,0.0005,0.0,Arkom,3,Inglaterra,90D NET
+13,varistor,0,componente eletrônico,0.001,0.0,Arkom,3,Inglaterra,90D NET
+14,lapis,0,material escolar,2,0,Leitura,1,Brasil,30D NET
+15,lapis,0,material escolar,2.5,0.0,Leitura,1,Brasil,30D NET
