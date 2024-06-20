@@ -53,7 +53,7 @@ if __name__ == "__main__":
     item6 = Item("LED", "componente eletrônico")
     controle_estoque.cadastra_item(item6)
 
-    #controle_estoque.printa_terminal_itens_cadastrados()
+    controle_estoque.printa_terminal_itens_cadastrados()
 
     controle_estoque.cadastra_item_fornecedor(fornecedor1, item1, 1)
     controle_estoque.cadastra_item_fornecedor(fornecedor1, item2, 1.50)
@@ -69,13 +69,15 @@ if __name__ == "__main__":
     controle_estoque.cadastra_item_fornecedor(fornecedor1, item1, 2.50)
 
     controle_estoque.cadastra_item_fornecedor(fornecedor2, item1, 10)
+    controle_estoque.cadastra_item_fornecedor(fornecedor3, item1, 50)
+    controle_estoque.cadastra_item_fornecedor(fornecedor3, item1, 4000)
 
     #controle_estoque.printa_terminal_itens_cadastrados()
     #controle_estoque.printa_terminal_fornecedores_cadastrados()
 
     filtra_estoque = FiltraEstoque()
     filtra_estoque.filtra_controle_estoque_nome(controle_estoque, "lapis")
-    #filtra_estoque.filtra_controle_estoque_fornecedor(controle_estoque, "Arkom")
+    filtra_estoque.filtra_controle_estoque_fornecedor(controle_estoque, "Arkom")
 
     ordena_estoque = OrdenaEstoque()
     #ordena_estoque.ordena_estoque_nome(controle_estoque)

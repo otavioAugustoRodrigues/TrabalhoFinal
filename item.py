@@ -85,14 +85,22 @@ class Item:
 
     def set_fornecedor(self, fornecedor : Type[Fornecedor]) -> None:
         if self.fornecedor is None:
-             self.fornecedor = Fornecedor(fornecedor.get_nome_fornecedor, fornecedor.get_pais_fornecedor, fornecedor.get_termo_pagamento_fornecedor)
-             self.fornecedor.set_id_fornecedor = fornecedor.get_id_fornecedor
+            self.fornecedor = Fornecedor(fornecedor.get_nome_fornecedor, fornecedor.get_pais_fornecedor, fornecedor.get_termo_pagamento_fornecedor)
+            self.fornecedor.set_id_fornecedor = fornecedor.get_id_fornecedor
         else:
-            if isinstance(fornecedor, Fornecedor):
-                self.fornecedor.set_nome_fornecedor = fornecedor.get_nome_fornecedor
-                self.fornecedor.set_pais_fornecedor = fornecedor.get_pais_fornecedor
-                self.fornecedor.set_termo_pagamento_fornecedor = fornecedor.get_termo_pagamento_fornecedor
-                self.fornecedor.set_id_fornecedor = fornecedor.get_id_fornecedor
+            self.fornecedor.set_nome_fornecedor = fornecedor.get_nome_fornecedor
+            self.fornecedor.set_pais_fornecedor = fornecedor.get_pais_fornecedor
+            self.fornecedor.set_termo_pagamento_fornecedor = fornecedor.get_termo_pagamento_fornecedor
+            self.fornecedor.set_id_fornecedor = fornecedor.get_id_fornecedor
         
     def get_valor_total_estoque(self) -> float:
          return self.get_valor_item * self.get_quantidade_item         
+    
+    # Método que checa se um item cadastrado já foi cadastrado anteriormente para este mesmo fornecedor.
+    def checa_item_cadastrado_fornecedor(self, nome_item_avaliado : str, fornecedor : Type[Fornecedor]) -> bool:
+        if self.fornecedor is not None:
+            print(f"if {self.get_nome_item} == {nome_item_avaliado} and {self.fornecedor.get_nome_fornecedor} == {fornecedor.get_nome_fornecedor}:")
+            if self.get_nome_item == nome_item_avaliado and self.fornecedor.get_nome_fornecedor == fornecedor.get_nome_fornecedor:
+                return True
+        else:
+            return False
