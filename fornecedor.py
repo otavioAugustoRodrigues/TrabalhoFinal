@@ -50,7 +50,6 @@ class Fornecedor:
     def get_id_fornecedor(self) -> int:
         return self._id_fornecedor
         
-    # Setter para o ID do fornecedor.
     @get_id_fornecedor.setter
     def set_id_fornecedor(self, id : int) -> None:
         self._id_fornecedor = id

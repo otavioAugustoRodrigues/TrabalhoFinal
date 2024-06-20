@@ -24,14 +24,10 @@ class BancoDados:
     lerItens = pd.read_excel("tabelaExcel.xlsx")
     for i in lerItens.itertuples(index=False):
       nome = i.Nome
-      quantidade = int(i.Quantidade) 
+      #quantidade = int(i.Quantidade) 
       categoria = i.Categoria
-      valor = float(i.Valor)
+      #valor = float(i.Valor)
 
-      item = Item(nome, quantidade, categoria, valor, True)
+      item = Item(nome, categoria)
       controle.cadastra_item(item)
     return controle
- 
-    
-
-
