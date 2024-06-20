@@ -41,20 +41,13 @@ class CriarItem():
     except:
       return False
 
-  def is_float(self,string: str)-> bool:
-    try:
-      float(string)
-      return True
-    except:
-      return False
-    
+
   def criarItem(self):
     n = self.getNome.get()
     q = self.getQuant.get()
     c = self.getCategoria.get()
-    v = self.getValor.get()
 
-    a=0
+    a = 0
     try:
       self.labelAvisoNome.destroy()
     except:
@@ -68,10 +61,6 @@ class CriarItem():
     except:
       pass
     try:
-      self.labelAvisoValor.destroy()
-    except:
-      pass
-    try:
       self.labelItemCriad.destroy()
     except:
       pass
@@ -80,14 +69,13 @@ class CriarItem():
       if(self.controle_estoque.itens_cadastrados[i].nome == n):
         a=1
         break
-    if(a==0 and self.is_int(q)== True and c != "" and self.is_float(v)== True):
-      item = Item(n,int(q),c,float(v),True)
+    if(a==0 and self.is_int(q)== True and c != ""):
+      item = Item(n,int(q),c,True)
       self.controle_estoque.cadastra_item(item)
       bd.salva_controle(self.controle_estoque)
       self.getNome.delete(0,tk.END)
       self.getQuant.delete(0,tk.END)
       self.getCategoria.delete(0,tk.END)
-      self.getValor.delete(0,tk.END)
       
       self.labelItemCriad =  Label(self.frame1,text="ITEM CRIADO COM SUCESSO",bg='#fffef0')
       self.labelItemCriad.place(relx="0.50", rely="0.45",relwidth="0.50", relheight="0.1")
@@ -104,13 +92,7 @@ class CriarItem():
       
       if(c == ""):
         self.labelAvisoCategoria =  Label(self.frame1,text="VALOR INVÁLIDO",bg='#fffef0')
-        self.labelAvisoCategoria.place(relx="0.50", rely="0.30",relwidth="0.50", relheight="0.075")
-      
-      if(self.is_float(v)== False):
-        self.labelAvisoValor =  Label(self.frame1,text="VALOR INVÁLIDO",bg='#fffef0')
-        self.labelAvisoValor.place(relx="0.50", rely="0.40",relwidth="0.50", relheight="0.075")
-      
-          
+        self.labelAvisoCategoria.place(relx="0.50", rely="0.30",relwidth="0.50", relheight="0.075")      
          
   def botoes(self, home: Type[tk.Tk]):
     self.botaoVoltar = Button(self.frame2, text="VOLTAR", command=lambda:self.voltar(home))
@@ -134,10 +116,8 @@ class CriarItem():
     self.getCategoria = Entry(self.frame1)
     self.getCategoria.place(relx="0.2", rely="0.30",relwidth="0.25", relheight="0.075")
 
-    self.labelValor =  Label(self.frame1,text="Valor: ",bg='#fffef0')
-    self.labelValor.place(relx="0.1", rely="0.40",relwidth="0.10", relheight="0.075")
-    self.getValor = Entry(self.frame1)
-    self.getValor.place(relx="0.2", rely="0.40",relwidth="0.25", relheight="0.075")
+
+    
 
   
 

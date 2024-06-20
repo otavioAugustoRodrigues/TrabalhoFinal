@@ -1,9 +1,8 @@
 class Item:
-    def __init__(self, nome : str, quantidade : int, categoria : str, valor : float, item_ativo : bool) -> None:
+    def __init__(self, nome : str, quantidade : int, categoria : str,  item_ativo : bool) -> None:
         self._nome_item = nome
         self._quantidade = quantidade
         self._categoria_item = categoria
-        self._valor_item = valor
         self._item_ativo = item_ativo
         self._item_id = 0
 
@@ -37,15 +36,6 @@ class Item:
     def categoria(self, categoria) -> None:
         self._categoria_item = categoria
     
-    # Getter para o valor do item (ex.: se é string etc...)
-    @property
-    def valor(self) -> float:
-            return self._valor_item
-
-    # Setter para o valor do item (ex.: se o valor é muito grande/pequeno etc...
-    @valor.setter
-    def valor(self, valor) -> None:
-        self._valor_item = valor
 
     # Getter para verificar se o item está obsoleto ou não.
     @property

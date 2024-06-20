@@ -7,14 +7,12 @@ class BancoDados:
     nomes = []
     quantidades = []
     categorias = []
-    valor = []
     for i in range(len(controle.itens_cadastrados)):
       nomes.append(controle.itens_cadastrados[i].nome)
       quantidades.append(controle.itens_cadastrados[i].quantidade)
       categorias.append(controle.itens_cadastrados[i].categoria)
-      valor.append(controle.itens_cadastrados[i].valor)
 
-    d = {'Nome': nomes, 'Quantidade': quantidades, 'Categoria': categorias, 'Valor': valor}
+    d = {'Nome': nomes, 'Quantidade': quantidades, 'Categoria': categorias}
     dados = pd.DataFrame(data= d)
     dados.to_excel("tabelaExcel.xlsx")
     
@@ -26,9 +24,8 @@ class BancoDados:
       nome = i.Nome
       quantidade = int(i.Quantidade) 
       categoria = i.Categoria
-      valor = float(i.Valor)
 
-      item = Item(nome, quantidade, categoria, valor, True)
+      item = Item(nome, quantidade, categoria, True)
       controle.cadastra_item(item)
     return controle
  

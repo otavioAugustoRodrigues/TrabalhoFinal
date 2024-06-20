@@ -24,7 +24,7 @@ class ControleEstoque:
     # Método que implementa uma função que verifica se um item está cadastrado no banco de itens cadastrados.
     def verifica_item_cadastrado(self, item : Type[Item]) -> bool:
         for i in self._itens_cadastrados:
-            if i.nome == item.nome and i.nome == item.valor:
+            if i.nome == item.nome:
                 return True
         else:
              return False 
