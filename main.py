@@ -3,15 +3,19 @@ from filtra_estoque import *
 from fornecedor import *
 from item import *
 from ordena_estoque import *
-from bancoDeDados import *
-from JanelasTK.home import Home
-from JanelasTK.ListItens import ListItens
-#from bancoDeDados import BancoDados
+# from bancoDeDados import *
+# from JanelasTK.home import Home
+# from JanelasTK.ListItens import ListItens
 from planilha_csv import *
 from comprador import *
 from vendedor import *
 
-import pandas as pd
+from janelas_tkinter.janela_home import *
+from janelas_tkinter.janela_criar_item import *
+from janelas_tkinter.janela_itens import *
+
+
+# import pandas as pd
 
 if __name__ == "__main__":
     '''
@@ -64,6 +68,8 @@ if __name__ == "__main__":
     controle_estoque.cadastra_item_fornecedor(fornecedor1, item1, 2)
     controle_estoque.cadastra_item_fornecedor(fornecedor1, item1, 2.50)
 
+    controle_estoque.cadastra_item_fornecedor(fornecedor2, item1, 10)
+
     #controle_estoque.printa_terminal_itens_cadastrados()
     #controle_estoque.printa_terminal_fornecedores_cadastrados()
 
@@ -83,7 +89,7 @@ if __name__ == "__main__":
     # item = Item("Açucar","Comida",5.40, True)
     #controle.cadastra_item(item)
 
-    #Home()
+    Home()
 
     #bd.salva_controle(controle)
 

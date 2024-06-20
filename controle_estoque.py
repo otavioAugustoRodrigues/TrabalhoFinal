@@ -46,12 +46,13 @@ class ControleEstoque:
     # Método que implementa uma função que verifica se um item está cadastrado no banco de itens cadastrados.
     def verifica_item_cadastrado(self, item : Type[Item]) -> bool:
         for i in self.get_itens_cadastrados:
-            if (i.get_nome_item == item.get_nome_item and 
-                i.get_categoria_item == item.get_categoria_item and
-                i.get_id_item == item.get_id_item and
-                i.get_nome_fornecedor_item == item.set_nome_fornecedor_item
-                ):
-                return True
+            if i.fornecedor is not None:
+                if (i.get_nome_item == item.get_nome_item and 
+                    i.get_categoria_item == item.get_categoria_item and
+                    i.get_id_item == item.get_id_item and
+                    i.fornecedor.get_nome_fornecedor == item.fornecedor.get_nome_fornecedor
+                    ):
+                    return True
         else:
              return False 
         
@@ -66,8 +67,9 @@ class ControleEstoque:
     # Método que cadastra um item no banco de itens cadastrados.
     def cadastra_item(self, item : Type[Item]) -> None:
         if not self.verifica_item_cadastrado(item):
-            self.aumenta_item_id_controle()
-            item.set_id_item = self.get_item_id_controle
+            if item.fornecedor is not None:
+                self.aumenta_item_id_controle()
+                item.set_id_item = self.get_item_id_controle    
             self._itens_cadastrados.append(item)
             print(f'{item.get_nome_item} {item.get_id_item} cadastrado com sucesso!')
 
@@ -92,8 +94,8 @@ class ControleEstoque:
 
     # Método que checa se um item cadastrado já foi cadastrado anteriormente para este mesmo fornecedor.
     def checa_item_cadastrado_fornecedor(self, item: Type[Item], fornecedor : Type[Fornecedor]) -> bool:
-        if item.fornecedor is not None:
-            for i in self.get_itens_cadastrados:
+        for i in self.get_itens_cadastrados:
+            if i.fornecedor is not None:
                 if i.get_nome_item == item.get_nome_item and i.fornecedor.get_nome_fornecedor == fornecedor.get_nome_fornecedor:
                     return True
         else:
@@ -105,7 +107,6 @@ class ControleEstoque:
     def cadastra_item_fornecedor(self, fornecedor : Type[Fornecedor], item : Type[Item], valor_item_fornecedor : float) -> None:
         if self.verifica_fornecedor_cadastrado(fornecedor):
             if self.checa_item_cadastrado_fornecedor(item, fornecedor):
-                #print("a")
                 print(f"item {item.get_nome_item} já cadastrado para o fornecedor {fornecedor.get_nome_fornecedor}. Atualizando valor do item...")
                 item.set_valor_item = valor_item_fornecedor
             else:

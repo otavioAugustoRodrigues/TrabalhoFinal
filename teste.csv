@@ -1,10 +1,7 @@
 ID,nome,quantidade,categoria,valor,Valor total em estoque,fornecedor,ID do fornecedor,pais fornecedor,termo pgto fornecedor
-7,lapis,0,material escolar,1,0,Leitura,1,Brasil,30D NET
-8,tesoura,0,material escolar,1.5,0.0,Leitura,1,Brasil,30D NET
-9,lapis,0,material escolar,3,0,Renner,2,EUA,60D NET
-10,cal√ßa,0,roupa,299.9,0.0,Renner,2,EUA,60D NET
-11,blusa,0,roupa,99.9,0.0,Renner,2,EUA,60D NET
-12,varistor,0,componente eletr√¥nico,0.0005,0.0,Arkom,3,Inglaterra,90D NET
-13,varistor,0,componente eletr√¥nico,0.001,0.0,Arkom,3,Inglaterra,90D NET
-14,lapis,0,material escolar,2,0,Leitura,1,Brasil,30D NET
-15,lapis,0,material escolar,2.5,0.0,Leitura,1,Brasil,30D NET
+1,lapis,0,material escolar,1,0,Leitura,1,Brasil,30D NET
+2,tesoura,0,material escolar,1.5,0.0,Leitura,1,Brasil,30D NET
+3,lapis,0,material escolar,3,0,Renner,2,EUA,60D NET
+4,calÁa,0,roupa,299.9,0.0,Renner,2,EUA,60D NET
+5,blusa,0,roupa,99.9,0.0,Renner,2,EUA,60D NET
+6,varistor,0,componente eletrÙnico,0.0005,0.0,Arkom,3,Inglaterra,90D NET

@@ -1,3 +1,4 @@
+'''
 import pandas as pd
 from controle_estoque import *
 from item import *
@@ -31,3 +32,4 @@ class BancoDados:
       item = Item(nome, categoria)
       controle.cadastra_item(item)
     return controle
+    '''

@@ -4,9 +4,11 @@ from controle_estoque import ControleEstoque
 from typing import Type
 from item import Item
 import tkinter as tk
-# from bancoDeDados import BancoDados
 
-# bd = BancoDados()
+'''
+from bancoDeDados import BancoDados
+bd = BancoDados()
+'''
 
 class ListItens( ):
   def __init__(self, home: tk.Tk)-> None:
