@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from controle_estoque import ControleEstoque
+from planilha_csv import *
 from typing import Type
 from item import Item
 import tkinter as tk
@@ -10,9 +11,9 @@ from bancoDeDados import BancoDados
 bd = BancoDados()
 '''
 
-class ListItens( ):
+class Estoque( ):
   def __init__(self, home: tk.Tk)-> None:
-   self.controle_estoque = bd.le_controle()
+   self.estoque = PlanilhaCSV.adiciona_itens_fornecedor_planilha_csv("teste.csv")
    self.janela = Tk()
    self.listitens()
    self.frame()
@@ -44,23 +45,29 @@ class ListItens( ):
     self.botaoVoltar.place(relx="0.5", rely="0.5",relwidth="0.25", relheight="0.30", anchor="center")
 
   def lista(self)-> None:
-   self.lis = ttk.Treeview(self.frame1,columns=('id','nome','quant','cate'), show='headings')
-   
-   self.lis.column('id',width=50,anchor="center")
-   self.lis.column('nome',width=200)
-   self.lis.column('quant',width=50,anchor="center")
-   self.lis.column('cate',width=200)
-   self.lis.heading('id', text='ID',anchor="center")
+   self.lis = ttk.Treeview(self.frame1,columns=('id','nome','quantidade','categoria','valor', 'nome do fornecedor'), show='headings')
+
+   self.lis.column('ID', width = 5 , anchor = "center")
+   self.lis.heading('ID', text='ID',anchor="center")
+
+   self.lis.column('nome', width = 30, anchor = "center")
    self.lis.heading('nome', text='NOME',anchor="center")
-   self.lis.heading('quant', text='QUANTIDADE',anchor="center")
-   self.lis.heading('cate', text='CATEGORIA',anchor="center")
+
+   self.lis.column('quantidade', width = 10 , anchor = "center")
+   self.lis.heading('quantidade', text='QUANTIDADE',anchor="center")
+
+   self.lis.column('categoria', width = 30)
+   self.lis.heading('categoria', text='CATEGORIA',anchor="center")
+
+   self.lis.column('valor', width = 10)
+   self.lis.heading('valor', text='VALOR',anchor="center")
+
+   self.lis.column('nome do fornecedor', width = 30)
+   self.lis.heading('nome do fornecedor', text='NOME DO FORNECEDOR',anchor="center")
+   
    self.lis.pack()
 
    self.lis.place(relx="0.05", rely="0.05", relwidth="0.9", relheight="0.9")
-
-   for i in range(len(self.controle_estoque.itens_cadastrados)):
-    id = self.controle_estoque.itens_cadastrados[i].item_id
-    nome = self.controle_estoque.itens_cadastrados[i].nome
-    quant = self.controle_estoque.itens_cadastrados[i].quantidade
-    categoria = self.controle_estoque.itens_cadastrados[i].categoria
-    self.lis.insert("","end", values=(id, nome, quant,categoria))
+   self.estoque.padrao_imprime_estoque()
+   for item in self.estoque.get_itens_cadastrados:
+    self.lis.insert("","end", values=(item.get_id_item, item.get_nome_item, item.get_quantidade_item, item.get_categoria_item, item.get_valor_item, item.fornecedor.get_nome_fornecedor))

@@ -99,7 +99,6 @@ class Item:
     # Método que checa se um item cadastrado já foi cadastrado anteriormente para este mesmo fornecedor.
     def checa_item_cadastrado_fornecedor(self, nome_item_avaliado : str, fornecedor : Type[Fornecedor]) -> bool:
         if self.fornecedor is not None:
-            print(f"if {self.get_nome_item} == {nome_item_avaliado} and {self.fornecedor.get_nome_fornecedor} == {fornecedor.get_nome_fornecedor}:")
             if self.get_nome_item == nome_item_avaliado and self.fornecedor.get_nome_fornecedor == fornecedor.get_nome_fornecedor:
                 return True
         else:

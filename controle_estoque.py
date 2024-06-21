@@ -28,7 +28,11 @@ class ControleEstoque:
     # Getter para o último ID do item cadastrado no banco de dados.
     @property
     def get_item_id_controle(self) -> int:
-            return self._id_item_controle
+        return self._id_item_controle
+    
+    @get_item_id_controle.setter
+    def set_item_id_controle(self, id : int) -> None:
+        self._id_item_controle = id
     
     # Método que aumenta o ID, conforme os itens são cadastrados no controle estoque.
     def aumenta_item_id_controle(self) -> None:

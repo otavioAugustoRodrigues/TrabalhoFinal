@@ -1,12 +1,12 @@
 from tkinter import *
-from JanelasTK.ListItens import ListItens
-from JanelasTK.criarItem import CriarItem
-#from JanelasTK.editarItem import EditarItem
-from controle_estoque import ControleEstoque 
+from controle_estoque import *
+from planilha_csv import *
 from typing import Type
 import tkinter as tk
 
 from datetime import datetime
+
+from janelas_tkinter.janela_itens import *
 
 current_date = datetime.now()
 formatted_date = current_date.strftime("%d/%m")
@@ -33,11 +33,11 @@ class Home():
 
   def botao_estoque(self)->None:
     self.janela.withdraw()
-    ListItens(self)
+    Estoque(self)
   
   def botao_lista_fornecedores(self)-> None:
     self.janela.withdraw()
-    CriarItem(self)
+    #CriarItem(self)
 
   def botao_lista_itens(self)-> None:
     self.janela.withdraw()
@@ -45,19 +45,15 @@ class Home():
 
   def botao_cadeira_suprimentos(self)-> None:
     self.janela.withdraw()
-    #EditarItem(self)
 
-  def botao_programador_producao(self)-> None:
+  def botao_programador_producao(self) -> None:
     self.janela.withdraw()
-    #EditarItem(self)
   
-  def botao_canal_vendas(self)-> None:
+  def botao_canal_vendas(self) -> None:
     self.janela.withdraw()
-    #EditarItem(self)
 
-  def botao_sair(self)-> None:
+  def botao_sair(self) -> None:
     self.janela.withdraw()
-    #EditarItem(self)
     self.janela.destroy()
 
   def botoes(self)-> None:

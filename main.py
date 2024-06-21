@@ -10,12 +10,11 @@ from planilha_csv import *
 from comprador import *
 from vendedor import *
 
-from janelas_tkinter.janela_home import *
-from janelas_tkinter.janela_criar_item import *
-from janelas_tkinter.janela_itens import *
+# from janelas_tkinter.janela_home import *
+# from janelas_tkinter.janela_itens import *
 
 
-# import pandas as pd
+import pandas as pd
 
 if __name__ == "__main__":
     '''
@@ -80,16 +79,19 @@ if __name__ == "__main__":
     filtra_estoque.filtra_controle_estoque_fornecedor(controle_estoque, "Arkom")
 
     ordena_estoque = OrdenaEstoque()
-    #ordena_estoque.ordena_estoque_nome(controle_estoque)
-    #ordena_estoque.ordena_estoque_categoria(controle_estoque)
-    #ordena_estoque.ordena_estoque_fornecedor(controle_estoque)
+    ordena_estoque.ordena_estoque_nome(controle_estoque)
+    ordena_estoque.ordena_estoque_categoria(controle_estoque)
+    ordena_estoque.ordena_estoque_fornecedor(controle_estoque)
 
-    controle_estoque.printa_terminal_itens_cadastrados()
+    # controle_estoque.printa_terminal_itens_cadastrados()
 
     #cria lista de atributos dos itens e passa como parametro para criação do DataFrame e depois passa para excel
 
     # item = Item("Açucar","Comida",5.40, True)
     #controle.cadastra_item(item)
+    '''
+    controle_estoque = ControleEstoque()
+    controle_estoque = PlanilhaCSV.adiciona_itens_fornecedor_planilha_csv("teste.csv")
 
     Home()
 
@@ -98,7 +100,7 @@ if __name__ == "__main__":
     planilha_csv = PlanilhaCSV()
     # planilha_csv.escreve_tela_GUI(controle_estoque)
     planilha_csv.escreve_csv_colunas_diferentes("teste.csv", controle_estoque)
-    '''
+    
     controle_estoque = ControleEstoque()
 
     planilha_csv = PlanilhaCSV()
