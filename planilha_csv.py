@@ -12,7 +12,7 @@ class PlanilhaCSV:
     
     # método responsável por adicionar itens em nosso controle de estoque diretamente de uma planilha.
     @classmethod
-    def adiciona_itens_fornecedor_planilha_csv(self, nomearquivo : str) -> Type[ControleEstoque]:
+    def adiciona_itens_fornecedor_planilha_csv(nomearquivo : str) -> Type[ControleEstoque]:
         with open(nomearquivo, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             controle_estoque = ControleEstoque()

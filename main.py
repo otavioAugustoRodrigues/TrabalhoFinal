@@ -3,24 +3,16 @@ from filtra_estoque import *
 from fornecedor import *
 from item import *
 from ordena_estoque import *
-# from bancoDeDados import *
-# from JanelasTK.home import Home
-# from JanelasTK.ListItens import ListItens
 from planilha_csv import *
 from comprador import *
 from vendedor import *
-
-from janelas_tkinter.janela_home import *
-from janelas_tkinter.janela_itens import *
-
+from sistema import *
 
 import pandas as pd
 
 if __name__ == "__main__":
+    Sistema().sistema_controle_estoque()
     '''
-    bd = BancoDados()
-    controle = bd.le_controle()
-    
     controle_estoque = ControleEstoque()
 
     fornecedor1 = Fornecedor("Leitura", "Brasil", "30D NET")
@@ -52,8 +44,6 @@ if __name__ == "__main__":
     item6 = Item("LED", "componente eletrônico")
     controle_estoque.cadastra_item(item6)
 
-    controle_estoque.printa_terminal_itens_cadastrados()
-
     controle_estoque.cadastra_item_fornecedor(fornecedor1, item1, 1)
     controle_estoque.cadastra_item_fornecedor(fornecedor1, item2, 1.50)
 
@@ -78,30 +68,6 @@ if __name__ == "__main__":
     filtra_estoque.filtra_controle_estoque_nome(controle_estoque, "lapis")
     filtra_estoque.filtra_controle_estoque_fornecedor(controle_estoque, "Arkom")
 
-    ordena_estoque = OrdenaEstoque()
-    ordena_estoque.ordena_estoque_nome(controle_estoque)
-    ordena_estoque.ordena_estoque_categoria(controle_estoque)
-    ordena_estoque.ordena_estoque_fornecedor(controle_estoque)
-
-    # controle_estoque.printa_terminal_itens_cadastrados()
-
-    #cria lista de atributos dos itens e passa como parametro para criação do DataFrame e depois passa para excel
-
-    # item = Item("Açucar","Comida",5.40, True)
-    #controle.cadastra_item(item)
+    planilha = PlanilhaCSV()
+    planilha.escreve_csv_colunas_diferentes("teste.csv", controle_estoque)
     '''
-    controle_estoque = ControleEstoque()
-    controle_estoque = PlanilhaCSV.adiciona_itens_fornecedor_planilha_csv("teste.csv")
-
-    Home()
-
-    #bd.salva_controle(controle)
-
-    planilha_csv = PlanilhaCSV()
-    # planilha_csv.escreve_tela_GUI(controle_estoque)
-    planilha_csv.escreve_csv_colunas_diferentes("teste.csv", controle_estoque)
-    
-    controle_estoque = ControleEstoque()
-
-    planilha_csv = PlanilhaCSV()
-    planilha_csv.adiciona_itens_fornecedor_planilha_csv("teste.csv", controle_estoque)

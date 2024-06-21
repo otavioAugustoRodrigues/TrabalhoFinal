@@ -1,9 +1,14 @@
 from typing import Type
 from item import *
+from controle_estoque import *
 
 class ProgramadorProducao:
-    def transforma_item_ativo(item : Item) -> None:
-        item.set_item_ativo = True 
+    def transforma_item_ativo(self, controle_estoque : Type[ControleEstoque], nome_item : str) -> None:
+        for i in controle_estoque.get_itens_cadastrados:
+            if i.get_nome_item == nome_item:
+                i.set_item_ativo = True 
     
-    def transforma_item_obsoleto(item : Item) -> None:
-        item.set_item_ativo = False
+    def transforma_item_obsoleto(self, controle_estoque : Type[ControleEstoque], nome_item : str) -> None:
+        for i in controle_estoque.get_itens_cadastrados:
+            if i.get_nome_item == nome_item:
+                i.set_item_ativo = False
