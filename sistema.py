@@ -26,11 +26,18 @@ class Sistema:
     def funcoes_sistema_visualizar_estoque(self) -> None:
         print(
 '''
+-----------------------------------------------------------------------------
+
 ( 1 ) Imprimir relatório com todos os itens do estoque.
 ( 2 ) Imprimir relatório por item específico.
 ( 0 ) Voltar.
-''')        
 
+-----------------------------------------------------------------------------
+''')        
+var = input("info:")
+
+match var:
+    case 1 : 
     # Implementa uma função que irá implementar as funções para visualizar as
     # funções relacionadas ao cadastro.
     def funcoes_sistema_visualizar_cadastro(self) -> None:

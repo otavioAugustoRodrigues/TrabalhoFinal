@@ -1,8 +1,1 @@
 ID,nome,quantidade,categoria,valor,Valor total em estoque,fornecedor,ID do fornecedor,pais fornecedor,termo pgto fornecedor
-1,lapis,0,material escolar,2.5,0.0,Leitura,1,Brasil,30D NET
-2,tesoura,0,material escolar,1.5,0.0,Leitura,1,Brasil,30D NET
-3,lapis,0,material escolar,10,0,Renner,2,EUA,60D NET
-4,calça,0,roupa,299.9,0.0,Renner,2,EUA,60D NET
-5,blusa,0,roupa,99.9,0.0,Renner,2,EUA,60D NET
-6,varistor,0,componente eletrônico,0.001,0.0,Arkom,3,Inglaterra,90D NET
-7,lapis,0,material escolar,4000,0,Arkom,3,Inglaterra,90D NET

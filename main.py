@@ -10,8 +10,8 @@ from planilha_csv import *
 from comprador import *
 from vendedor import *
 
-# from janelas_tkinter.janela_home import *
-# from janelas_tkinter.janela_itens import *
+from janelas_tkinter.janela_home import *
+from janelas_tkinter.janela_itens import *
 
 
 import pandas as pd
@@ -20,7 +20,7 @@ if __name__ == "__main__":
     '''
     bd = BancoDados()
     controle = bd.le_controle()
-    '''
+    
     controle_estoque = ControleEstoque()
 
     fornecedor1 = Fornecedor("Leitura", "Brasil", "30D NET")
@@ -105,4 +105,3 @@ if __name__ == "__main__":
 
     planilha_csv = PlanilhaCSV()
     planilha_csv.adiciona_itens_fornecedor_planilha_csv("teste.csv", controle_estoque)
-    '''
