@@ -88,16 +88,18 @@ class ControleEstoque:
 
     # Método responsável por imprimir o cabeçalho da lista de itens.
     def padrao_imprime_cabecalho(self) -> None:
-        print(f"{'ID' :<5}\t{'Nome' :<15}\t{'Qtd.' :<5}\t{'Categoria' :<25}\t{'Valor' :<10}\t{'Valor total em estoque':<25}\t{'Nome do fornecedor' :<20}\t")
+        print("----------------------------------------------------------------------------------------------------------------------")
+        print(f"{'ID' :<5}{'Nome' :<15}{'Qtd.' :<5}{'Categoria' :<25}{'Valor' :<10}{'Valor total em estoque':<25}{'Nome do fornecedor' :<20}{'ID fornecedor':<15}")
+        print("----------------------------------------------------------------------------------------------------------------------")
 
     # Método responsável por imprimir as informações de cada item da lista de itens.
     def padrao_imprime_estoque(self) -> None:
         self.padrao_imprime_cabecalho()
         for i_item_cadastrado in self.get_itens_cadastrados:
             if i_item_cadastrado.fornecedor is None:
-                print(f"{i_item_cadastrado.get_id_item :< 5}\t{i_item_cadastrado.get_nome_item :<15}\t{i_item_cadastrado.get_quantidade_item :<5}\t{i_item_cadastrado.get_categoria_item :<25}\t{i_item_cadastrado.get_valor_item :<10}\t{i_item_cadastrado.get_valor_total_estoque():<10}\t{'0':<30}")   
+                print(f"{i_item_cadastrado.get_id_item :< 5}{i_item_cadastrado.get_nome_item :<15}{i_item_cadastrado.get_quantidade_item :<5}{i_item_cadastrado.get_categoria_item :<25}{i_item_cadastrado.get_valor_item :<10}{i_item_cadastrado.get_valor_total_estoque():<25}{'0':<30}{'0':<15}")   
             else:
-                print(f"{i_item_cadastrado.get_id_item :< 5}\t{i_item_cadastrado.get_nome_item :<15}\t{i_item_cadastrado.get_quantidade_item :<5}\t{i_item_cadastrado.get_categoria_item :<25}\t{i_item_cadastrado.get_valor_item :<10}\t{i_item_cadastrado.get_valor_total_estoque():<10}\t{i_item_cadastrado.fornecedor.get_nome_fornecedor:<30}")   
+                print(f"{i_item_cadastrado.get_id_item :< 5}{i_item_cadastrado.get_nome_item :<15}{i_item_cadastrado.get_quantidade_item :<5}{i_item_cadastrado.get_categoria_item :<25}{i_item_cadastrado.get_valor_item :<10}{i_item_cadastrado.get_valor_total_estoque():<25}{i_item_cadastrado.fornecedor.get_nome_fornecedor:<30}{i_item_cadastrado.fornecedor.get_id_fornecedor:<15}")   
 
     # Método que imprime na tela todos os fornecedores cadastrados no controle de estoque.
     def printa_terminal_fornecedores_cadastrados(self):
@@ -122,25 +124,29 @@ class ControleEstoque:
 
         else:
             print("fornecedor não cadastrado!")
+            self.cadastra_fornecedor(fornecedor)
+            self.cadastra_item_fornecedor(fornecedor, item, valor_item_fornecedor)
 
     def retorna_item_nome_fornecedor(self, item_nome : str, fornecedor_nome : str) -> Type[Item]:
         for item in self.get_itens_cadastrados:
             if item.fornecedor is not None:
-                if item.nome == item_nome and item.fornecedor.get_nome_fornecedor == fornecedor_nome:
+                if item.get_nome_item == item_nome and item.fornecedor.get_nome_fornecedor == fornecedor_nome:
                     return item
+        else:
+            print("Item não cadastrado.")
                 
     def inicializa_controle_estoque(self, nomearquivo : str) -> None:
         with open(nomearquivo, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
 
             for row in reader:
-                print(row['nome'])  # Debugging: Print each row
                 item = Item(row['nome'], row['categoria'])
                 item.set_quantidade_item = row['quantidade']
                 item.set_id_item = row['ID']
                 fornecedor = Fornecedor(row['fornecedor'],row['pais fornecedor'], row['termo pgto fornecedor'])
                 fornecedor.set_id_fornecedor = row['ID do fornecedor']
-                self.cadastra_item_fornecedor(row['fornecedor'], item, float(row['valor']))
+                self.cadastra_fornecedor(fornecedor)
+                self.cadastra_item_fornecedor(fornecedor, item, float(row['valor']))
                 
                 current_id = int(row['ID'])
                 if not hasattr(self, 'max_id_controle'):

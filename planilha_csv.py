@@ -10,24 +10,6 @@ class PlanilhaCSV:
     current_date = datetime.now()
     formatted_date = current_date.strftime("%d/%m")
     
-    # método responsável por adicionar itens em nosso controle de estoque diretamente de uma planilha.
-    @classmethod
-    def adiciona_itens_fornecedor_planilha_csv(nomearquivo : str) -> Type[ControleEstoque]:
-        with open(nomearquivo, newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            controle_estoque = ControleEstoque()
-
-            for row in reader:
-                print(f"Processing row: {row}")  # Debugging: Print each row
-                item = Item(row['nome'], row['categoria'])
-                item.set_quantidade_item = row['quantidade']
-                item.set_id_item = row['ID']
-                fornecedor = Fornecedor(row['fornecedor'],row['pais fornecedor'], row['termo pgto fornecedor'])
-                fornecedor.set_id_fornecedor = row['ID do fornecedor']
-                controle_estoque.cadastra_item_fornecedor(row['fornecedor'], item, row['valor'])
-                controle_estoque.set_item_id_controle = max(row['ID'])
-
-        return controle_estoque
                 
     # função responsável por imprimir o estado atual do terminal em um arquivo .csv.
     @classmethod
@@ -39,6 +21,7 @@ class PlanilhaCSV:
             for item in controle_estoque.get_itens_cadastrados:
                 if item.fornecedor is not None:
                     writer.writerow({'ID': item.get_id_item, 'nome': item.get_nome_item, 'quantidade': item.get_quantidade_item, 'categoria': item.get_categoria_item, 'valor': item.get_valor_item, 'Valor total em estoque' : item.get_valor_total_estoque(), 'fornecedor' : item.fornecedor.get_nome_fornecedor, 'ID do fornecedor' : item.fornecedor.get_id_fornecedor, 'pais fornecedor' : item.fornecedor.get_pais_fornecedor, 'termo pgto fornecedor' : item.fornecedor.get_termo_pagamento_fornecedor})
+
 
     # Método responsável por imprimir uma GUI com informações do controle de estoque no dia atual.
     @classmethod

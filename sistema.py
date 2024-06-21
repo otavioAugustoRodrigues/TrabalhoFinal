@@ -2,6 +2,7 @@ from controle_estoque import *
 from filtra_estoque import *
 from fornecedor import *
 from planilha_csv import *
+from planilha_excel import *
 from item import *
 from ordena_estoque import *
 from comprador import *
@@ -15,7 +16,7 @@ class Sistema:
     def funcoes_sistema_inicial(self) -> None:
         print(
 '''
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 
 ( 1 ) Estoque.
 ( 2 ) Cadastro.
@@ -24,7 +25,7 @@ class Sistema:
 ( 5 ) Canal de Vendas.
 ( 0 ) Sair.
 
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 ''')        
     
     # Implementa uma função que irá implementar as funções para visualizar as
@@ -32,7 +33,7 @@ class Sistema:
     def funcoes_sistema_estoque(self) -> None:
         print(
 '''
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 
 ( 1 ) Visualizar estoque no dia de hoje.
 ( 2 ) Filtrar estoque por nome.
@@ -43,7 +44,7 @@ class Sistema:
 ( 7 ) Ordenar estoque por nome de fornecedor.
 ( 0 ) Voltar.
 
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 ''')        
 
     # Implementa uma função que irá implementar as funções para visualizar as
@@ -51,14 +52,14 @@ class Sistema:
     def funcoes_cadastro(self) -> None:
         print(
 '''
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 
 ( 1 ) Cadastra novo item.
 ( 2 ) Cadastra novo fornecedor.
 ( 3 ) Cadastra um fornecedor para um determinado item.
 ( 0 ) Voltar.
 
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 ''')        
 
     # Implementa uma função que irá implementar as funções para visualizar as
@@ -66,12 +67,12 @@ class Sistema:
     def funcoes_cadeia_suprimentos(self) -> None:
         print(
 '''
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 
 ( 1 ) Compra um item.
 ( 0 ) Voltar.
 
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 ''')        
     
     # Implementa uma função que irá implementar as funções para visualizar as
@@ -79,13 +80,13 @@ class Sistema:
     def funcoes_programador_producao(self) -> None:
         print(
 '''
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 
 ( 1 ) Configurar um item como ativo.
 ( 2 ) Configurar um item como obsoleto.
 ( 0 ) Voltar.
 
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 ''')        
             
     # Implementa uma função que irá implementar as funções para visualizar as
@@ -93,39 +94,49 @@ class Sistema:
     def funcoes_canal_vendas(self) -> None:
         print(
 '''
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 
 ( 1 ) Vender um item.
 ( 0 ) Voltar.
 
------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 ''')        
     # Implementa uma função que irá ditar o funcionamento do sistema.
     def sistema_controle_estoque(self):
         print("inicializando o sistema...")
         controle_estoque = ControleEstoque()
-        controle_estoque.inicializa_controle_estoque("teste.csv")
+        controle_estoque.inicializa_controle_estoque("planilha_csv.csv")
+        PlanilhaExcel.converte_csv_excel('planilha_csv.csv', 'planilha_excel.xlsx')
 
         i = True
         while i:
             self.funcoes_sistema_inicial()
-            input_usr = int(input("Informe uma opção."))
-            
+            try:
+                input_usr = int(input("Informe uma opção."))
+            except ValueError:
+                print("Entrada inválida. Por favor, informe um número inteiro.")
+                continue
+            print()
             match input_usr:
                 case 0:
                     print("encerrando o sistema...\n\
                     salvando as alterações feitas...")
-                    PlanilhaCSV.escreve_csv_colunas_diferentes("teste.csv", controle_estoque)
+                    PlanilhaCSV.escreve_csv_colunas_diferentes("planilha_csv.csv", controle_estoque)
+                    PlanilhaExcel
                     break
 
                 case 1:
                     while i == True:
                         self.funcoes_sistema_estoque()
-                        input_usr = int(input("Informe uma opção."))
+                        try:
+                            input_usr = int(input("Informe uma opção."))
+                        except ValueError:
+                            print("Entrada inválida. Por favor, informe um número inteiro.")
+                            continue
+                        print()
                         match input_usr:
                             case 0:
                                 print("Voltando...")
-                                i = 0
                                 break
                             
                             case 1:
@@ -172,16 +183,20 @@ class Sistema:
                 case 2:
                     while i == True:
                         self.funcoes_cadastro()
-                        input_usr = int(input("Informe uma opção."))
+                        try:
+                            input_usr = int(input("Informe uma opção."))
+                        except ValueError:
+                            print("Entrada inválida. Por favor, informe um número inteiro.")
+                            continue
+                        print()
                         match input_usr:
                             case 0:
                                 print("Voltando...")
-                                i = 0
                                 break
                             case 1:
                                 print("( 1 ) Cadastra novo item.\n")
-                                input_nome_item = input("Informe o nome do item")
-                                input_categoria_item = input("Informe a categoria do item")
+                                input_nome_item = input("Informe o nome do item: ")
+                                input_categoria_item = input("Informe a categoria do item: ")
                                 novo_item = Item(input_nome_item, input_categoria_item)
                                 controle_estoque.cadastra_item(novo_item)
                                 break
@@ -197,27 +212,32 @@ class Sistema:
                             
                             case 3:
                                 print("( 3 ) Cadastra um fornecedor para um determinado item.\n")
-                                input_nome_item = input("Informe o nome do item")
-                                input_categoria_item = input("Informe a categoria do item")
+                                input_nome_item = input("Informe o nome do item: ")
+                                input_categoria_item = input("Informe a categoria do item: ")
                                 novo_item = Item(input_nome_item, input_categoria_item)
 
-                                input_nome_item = input("Informe o nome do fornecedor: ")
+                                input_nome_fornecedor = input("Informe o nome do fornecedor: ")
                                 input_pais_fornecedor = input("Informe o país do fornecedor: ")
                                 input_termo_pgto_fornecedor = input("Informe o termo de pagamento do fornecedor: ")
+                                input_valor_item = input("Informe o valor de venda do item: ")
                                 novo_fornecedor = Fornecedor(input_nome_fornecedor, input_pais_fornecedor, input_termo_pgto_fornecedor)
 
-                                controle_estoque.cadastra_item_fornecedor(novo_item, novo_fornecedor)
+                                controle_estoque.cadastra_item_fornecedor(novo_fornecedor, novo_item, input_valor_item)
                                 break
 
 
                 case 3: 
                     while i == True:
                         self.funcoes_cadeia_suprimentos()
-                        input_usr = int(input("Informe uma opção."))
+                        try:
+                            input_usr = int(input("Informe uma opção."))
+                        except ValueError:
+                            print("Entrada inválida. Por favor, informe um número inteiro.")
+                            continue
+                        print()
                         match input_usr:
                             case 0:
                                 print("Voltando...")
-                                i = 0
                                 break
                             case 1:
                                 print("( 1 ) Compra um item.\n")
@@ -231,11 +251,15 @@ class Sistema:
                 case 4: 
                     while i == True:
                         self.funcoes_programador_producao()
-                        input_usr = int(input("Informe uma opção."))
+                        try:
+                            input_usr = int(input("Informe uma opção."))
+                        except ValueError:
+                            print("Entrada inválida. Por favor, informe um número inteiro.")
+                            continue
+                        print()
                         match input_usr:
                             case 0:
                                 print("Voltando...")
-                                i = 0
                                 break
 
                             case 1:
@@ -255,10 +279,10 @@ class Sistema:
                     while i == True:
                         self.funcoes_canal_vendas()
                         input_usr = int(input("Informe uma opção."))
+                        print()
                         match input_usr:
                             case 0:
                                 print("Voltando...")
-                                i = 0
                                 break
                             case 1:
                                 print("( 1 ) Vender um item.\n")

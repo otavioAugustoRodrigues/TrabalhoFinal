@@ -14,9 +14,7 @@ class OrdenaEstoque:
                 array_filtrado.append(i)
 
         controle_estoque_ordenado_nome.set_itens_cadastados = sorted(array_filtrado, key=lambda x: x.get_nome_item)
-        controle_estoque_ordenado_nome.padrao_imprime_cabecalho()
-        for item in controle_estoque_ordenado_nome.get_itens_cadastrados:
-            controle_estoque_ordenado_nome.padrao_imprime_estoque(item)
+        controle_estoque_ordenado_nome.padrao_imprime_estoque()
 
     # Classe responsável por ordenar o que está cadastrado no estoque de acordo com a categoria dos itens.
     @classmethod
@@ -28,9 +26,7 @@ class OrdenaEstoque:
                 array_filtrado.append(i)
 
         controle_estoque_ordenado_categoria.set_itens_cadastados = sorted(array_filtrado, key=lambda x: x.get_categoria_item)
-        controle_estoque_ordenado_categoria.padrao_imprime_cabecalho()
-        for item in controle_estoque_ordenado_categoria.get_itens_cadastrados:
-            controle_estoque_ordenado_categoria.padrao_imprime_estoque(item)
+        controle_estoque_ordenado_categoria.padrao_imprime_estoque()
     
     # Classe responsável por ordenar o que está cadastrado no estoque de acordo com o nome do fornecedor dos itens.
     @classmethod
@@ -42,6 +38,4 @@ class OrdenaEstoque:
                 array_filtrado.append(i)
         else:
             controle_estoque_ordenado_fornecedor.set_itens_cadastados = sorted(array_filtrado, key=lambda x: x.fornecedor.get_nome_fornecedor)
-            controle_estoque_ordenado_fornecedor.padrao_imprime_cabecalho()
-            for item in controle_estoque_ordenado_fornecedor.get_itens_cadastrados:
-                controle_estoque_ordenado_fornecedor.padrao_imprime_estoque(item)
+            controle_estoque_ordenado_fornecedor.padrao_imprime_estoque()
