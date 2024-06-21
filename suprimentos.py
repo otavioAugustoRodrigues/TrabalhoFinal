@@ -1,15 +1,9 @@
 from abc import ABC, abstractmethod
 from typing import Type
 from item import *
-from item import Item
+from controle_estoque import *
 
 class Suprimentos(ABC):
     @abstractmethod
-    def opera_material(self, item : Type[Item], quantidade : int) -> None:
+    def opera_material(self, controle_estoque : Type[ControleEstoque], quantidade: int, nome_item : str, nome_fornecedor : str) -> None:
         pass
-
-    def transforma_item_ativo(item : Item) -> None:
-        item.item_ativo = True
-    
-    def transforma_item_obsoleto(item : Item) -> None:
-        item.item_ativo = False
